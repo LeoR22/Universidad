@@ -1,0 +1,53 @@
+Vehiculos
+--------------------------------------------------------------
+| ID_Vehiculo (PK) | Marca | Modelo | Tipo | Cantidad_puertas |
+| Cantidad_airbags | Tiene_camara_reversa | Tipo_caja | Cilindraje |
+| Numero_motor | Valor_estimado | Color |
+--------------------------------------------------------------
+
+Vehiculos_Usados
+--------------------------------------------------------------
+| ID_Vehiculo (PK, FK a Vehiculos) | Kilometraje |
+| Cant_dueños_anteriores | Observaciones_estado |
+--------------------------------------------------------------
+
+Ventas
+--------------------------------------------------------------
+| ID_Venta (PK) | ID_Vehiculo (FK a Vehiculos) | Valor_venta |
+| Descuento | Fecha_venta | Placa | Ciudad_registro |
+--------------------------------------------------------------
+
+Clientes
+--------------------------------------------------------------
+| ID_Cliente (PK) | Nombre | Apellido | Contacto | Identificacion |
+--------------------------------------------------------------
+
+Interacciones_Clientes
+--------------------------------------------------------------
+| ID_Interaccion (PK) | ID_Cliente (FK a Clientes) |
+| ID_Vehiculo (FK a Vehiculos) | Carro_interes |
+--------------------------------------------------------------
+
+Separacion_Vehiculo
+--------------------------------------------------------------
+| ID_Separacion (PK) | ID_Cliente (FK a Clientes) |
+| ID_Vehiculo (FK a Vehiculos) | Abono | Fecha_separacion |
+--------------------------------------------------------------
+
+Pagos
+--------------------------------------------------------------
+| ID_Pago (PK) | ID_Separacion (FK a Separacion_Vehiculo) |
+| Banco | Tasa | Valor | Fecha_pago |
+--------------------------------------------------------------
+
+Entrega_Vehiculo
+--------------------------------------------------------------
+| ID_Entrega (PK) | ID_Separacion (FK a Separacion_Vehiculo) |
+| Fecha_entrega |
+--------------------------------------------------------------
+
+Cambios_Vehiculo
+--------------------------------------------------------------
+| ID_Cambio (PK) | ID_Separacion (FK a Separacion_Vehiculo) |
+| Cambio_realizado | Fecha_cambio |
+--------------------------------------------------------------

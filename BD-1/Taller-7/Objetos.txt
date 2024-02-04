@@ -1,0 +1,58 @@
+CREATE DATABASE OBJETOSVIRTUALES;
+use objetosvirtuales;
+
+create table facultades(
+nombre varchar(30) not null,
+codigo int not null primary key) ;
+
+create table departamentos(
+nombre varchar(30) not null,
+codigo int not null primary key,
+cod_facultad int not null,
+constraint fk_dep foreign key(cod_facultad)
+references facultades(codigo)); 
+
+create table temas (
+codigo int not null primary key,
+nombre varchar(40) not null); 
+
+create table profesores (
+nombre varchar(40) not null,
+email varchar(30) null,
+cedula int not null primary key,
+cod_dpto int not null,
+constraint fk_prof foreign key (cod_dpto) 
+references departamentos(codigo)); 
+
+
+
+insert into facultades
+values('Ingeniería',100);
+
+insert into facultades
+values('Comunicacion Social',200);
+
+insert into facultades
+values('Ciencias Básicas',300);
+
+
+insert into departamentos
+values('Operaciones y Sistemas','300','100');
+
+insert into departamentos
+values('Automatica y Electrónica','200','100');
+
+insert into departamentos
+values('Matematicas','400','300');
+
+insert into temas 
+values (301, 'diagrama de clases');
+
+insert into temas
+values (302, 'elicitación de requerimientos');
+
+insert into temas 
+values (401, 'Ecuaciones lineales'); 
+
+
+

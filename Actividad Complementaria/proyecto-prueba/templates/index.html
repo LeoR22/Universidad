@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Character Creator</title>
+    <style>
+        /* Estilo para la imagen del personaje */
+        #flash_image {
+            cursor: pointer;
+            /* Cambia el cursor al pasar sobre la imagen */
+        }
+
+        #user_image {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Character Creator</h1>
+    <!-- Imagen del personaje Flash -->
+    <img id="flash_image" src="{{ url_for('static', filename='images/flash.jpg') }}" alt="Flash">
+    <form id="user_image_form" action="/create_character" method="post" enctype="multipart/form-data">
+        <!-- Input oculto para almacenar el personaje seleccionado -->
+        <input type="hidden" id="character" name="character" value="flash">
+        <!-- Campo para cargar la imagen del usuario (oculto inicialmente) -->
+        <input type="file" id="user_image" name="user_image" accept="image/*"><br><br>
+        <input type="submit" value="Create Character">
+    </form>
+    <script>
+        // Función para seleccionar el personaje al hacer clic en la imagen
+        document.getElementById('flash_image').onclick = function () {
+            document.getElementById('character').value = 'flash'; // Almacena 'flash' como personaje seleccionado
+            document.getElementById('flash_image').style.display = 'none'; // Oculta la imagen del personaje Flash
+            document.getElementById('user_image').style.display = 'inline'; // Muestra el campo de carga de imagen del usuario
+            alert('Flash selected!'); // Muestra un mensaje de confirmación (puedes eliminar esta línea si no es necesaria)
+        };
+    </script>
+</body>
+
+</html>

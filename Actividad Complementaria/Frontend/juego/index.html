@@ -1,0 +1,73 @@
+<link rel="stylesheet" type="text/css"
+        href="file:///C:/ARCHIVOS-no%20borrar/PERSONAL/Universidad/Actividad%20Complementaria/Frontend/juego/index.css">
+<script
+        src="file:///C:/ARCHIVOS-no%20borrar/PERSONAL/Universidad/Actividad%20Complementaria/Frontend/juego/index.js"></script>
+<div id="starting-overlay">
+        <h1 class="game-title">A <span>M</span><span>o</span><span>v</span><span>i</span><span>e</span><span>s</span>
+                Game</h1>
+        <button class="start-game">play a movies game</button>
+        <p class="start-with-instructions"><a href="" class="start-with-instructions-link">teach me how to play
+                        first</a></p>
+</div>
+
+<div id="rules-overlay">
+        <div class="rules-inner">
+                <h3 class="rules-headline">How to play</h3>
+                <p class="rules-details">A Movies Game is based on Google's ability to correctly identify a movie when
+                        given a very vague plot summary.</p>
+                <p class="rules-details">The aim is simple: without using any actor, director or character names, or
+                        words from the title, can you make a Google search that results in a movie's IMDB or Wikipedia
+                        page as the first result? How many words do you need? Can you do it in five words? Three?</p>
+                <p class="rules-details">For example, you might get the movie Inception*. If you type "stealing dreams
+                        movie" in the search box, you've made a three word guess. Press the button or hit enter to find
+                        out if you're correct**. If you're not, try again. If you are, try another with fewer words, or
+                        get a new movie and play again.
+                <p class="rules-details">That's pretty much it. Feel free to reach out with comments, bugs, requests, or
+                        anything else.</p>
+                <p class="rules-details">*the movie is picked randomly from a subset of IMDB's 1000 top rated movies</p>
+                <p class="rules-details">**You won't be, by the way. That query comes up with the 1995 movie The City Of
+                        Lost Children. "Stealing dreams top movie" is a winner though, as is "dreams extraction movie".
+                </p>
+                <p class="rules-details"></p>
+                <p class="rules-details">
+                        <a href="" class="dismiss-rules-trigger">
+                                <svg>
+                                        <path stroke="#444" stroke-width="2" fill="none" d="M0,0,17.75,17.75" />
+                                        <path stroke="#444" stroke-width="2" fill="none" d="M0,17.75,17.75,0" />
+                                </svg>
+                        </a>
+        </div>
+</div>
+
+<div id="game-container">
+        <p class="helper-text -upper">
+                your movie is...
+        </p>
+        <h2 class="movie-title"></h2>
+        <p class="helper-text -lower">
+                <span class="default-helper">
+                        your guess is <span class="guess-word-count">0</span> <span class="guess-word-word">words</span>
+                        long
+                </span>
+                <span class="winner-helper">you got it in <span class="guess-word-count">0</span> <span
+                                class="guess-word-word">words</span>! can you do better?</span>
+                <span class="loser-helper">your guess was <span class="guess-word-count">0</span> <span
+                                class="guess-word-word">words</span> long</span>
+        </p>
+        <div class="guess-input-group">
+                <div class="guess-input-wrapper">
+                        <input class="guess-input" type="text" />
+                        <button class="guess-button">guess!</button>
+                </div>
+        </div>
+        <p class="helper-links">stumped?
+                <a href="" class="more-details-link"><!--see more about the movie</a> or -->
+                        <a href="" class="reset-game-link">get a different movie</a>
+        </p>
+        <div class="search-results">
+        </div>
+        <a href="" class="display-rules-trigger">?</a>
+</div>
+
+<div id="win-overlay"></div>
+<div id="lose-overlay"></div>

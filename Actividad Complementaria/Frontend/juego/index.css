@@ -1,0 +1,479 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap');
+
+:root {
+    --blue: #4285f4;
+    --red: #db4437;
+    --yellow: #f4b400;
+    --green: #0f9d58;
+    --black: #333333;
+    --dark-gray: #555555;
+    --mid-gray: #818181;
+    --light-gray: #DDDDDD;
+    --white: #FFFFFF;
+
+    --huge-text-size: 100px;
+    --big-text-size: 32px;
+    --medium-text-size: 24px;
+    --small-text-size: 18px;
+
+    --bold: 700;
+    --medium: 400;
+    --light: 300;
+
+    --win-lose-overlay-z-index: 10;
+    --starting-overlay-z-index: 4;
+    --rules-overlay-z-index: 3;
+    --rules-button-overlay-z-index: 2;
+
+    --sans-font: 'Rubik', Helvetica, Arial, sans-serif;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--sans-font);
+    color: var(--black);
+    background-color: var(--white);
+}
+
+
+* {
+    box-sizing: border-box;
+    border: 1px dotted #0f0 !important;
+}
+
+#starting-overlay {
+    position: fixed;
+    z-index: $starting-overlay-z-index;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: $white;
+    overflow-y: scroll;
+
+    @include breakpoint-medium-or-larger {
+        padding: 100px 0;
+    }
+
+    @include breakpoint-small {
+        padding: 100px 0;
+    }
+
+    .game-title {
+        @include big-text;
+        text-align: center;
+        color: $dark-gray;
+
+        span:nth-child(1) {
+            color: $blue;
+        }
+
+        span:nth-child(2) {
+            color: $red;
+        }
+
+        span:nth-child(3) {
+            color: $yellow;
+        }
+
+        span:nth-child(4) {
+            color: $blue;
+        }
+
+        span:nth-child(5) {
+            color: $green;
+        }
+
+        span:nth-child(6) {
+            color: $red;
+        }
+    }
+
+    .start-game {
+        @include big-button;
+        display: block;
+
+        @include breakpoint-medium-or-larger {
+            margin: 50px auto 30px auto;
+        }
+
+        @include breakpoint-small {
+            margin: 30px auto 20px auto;
+        }
+
+        &:hover {
+            cursor: pointer;
+            background: lighten($blue, 5);
+        }
+    }
+
+    .start-with-instructions {
+        font-family: $sans-font;
+        font-weight: $light;
+        text-align: center;
+
+    }
+
+    .start-with-instructions-link {
+        color: $mid-gray;
+
+        &:hover {
+            color: lighten($mid-gray, 10);
+        }
+
+        @include breakpoint-small {
+            font-size: 14px;
+            padding: 15px 0;
+        }
+    }
+}
+
+#rules-overlay {
+    display: none;
+    z-index: $rules-overlay-z-index;
+    background: rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    cursor: pointer;
+
+    @include breakpoint-medium-or-larger {
+        padding: 30px 10px;
+    }
+
+    @include breakpoint-small {
+        padding: 15px 10px;
+    }
+
+    .rules-inner {
+        background: $white;
+        max-width: 420px;
+        min-height: 420px;
+        margin: 0 auto;
+        padding: 30px;
+        position: relative;
+        cursor: auto;
+        color: $dark-gray;
+    }
+
+    .rules-headline {
+        font-family: $sans-font;
+        font-weight: $bold;
+        font-size: $medium-text-size;
+        margin-bottom: 15px;
+
+        @include breakpoint-extra-small {
+            font-size: 20px;
+        }
+    }
+
+    .rules-details {
+        font-family: $sans-font;
+        font-weight: $light;
+        line-height: 1.4;
+        margin-bottom: 10px;
+
+        @include breakpoint-extra-small {
+            font-size: 15px;
+        }
+    }
+
+    .dismiss-rules-trigger {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 44px;
+        height: 44px;
+        cursor: pointer;
+        padding: 13px;
+    }
+}
+
+#game-container {
+    @include breakpoint-medium-or-larger {
+        padding: 100px 20px;
+    }
+
+    @include breakpoint-small {
+        padding: 40px 15px;
+    }
+
+    .movie-title {
+        @include big-text;
+        text-align: center;
+        color: $black;
+        padding: 0 20px;
+
+        @include breakpoint-large {
+            margin: 80px auto;
+        }
+
+        @include breakpoint-medium {
+            margin: 60px auto;
+        }
+
+        @include breakpoint-small {
+            margin: 40px auto;
+        }
+
+        &.-winner {
+            color: $green;
+        }
+
+        &.-loser {
+            color: $red;
+        }
+    }
+
+    .movie-year {
+        color: $dark-gray;
+
+        &.-winner {
+            color: $green;
+        }
+
+        &.-loser {
+            color: $red;
+        }
+    }
+
+    .helper-text {
+        font-family: $sans-font;
+        font-weight: $bold;
+        color: $dark-gray;
+        text-align: center;
+
+        @include breakpoint-medium-or-larger {
+            font-size: $big-text-size;
+        }
+
+        @include breakpoint-small {
+            font-size: $medium-text-size;
+        }
+
+        @include breakpoint-extra-small {
+            font-size: 20px;
+        }
+
+        &.-upper {
+            @include breakpoint-medium-or-larger {
+                margin: 0 auto 30px auto;
+            }
+
+            @include breakpoint-small {
+                margin: 0 auto 10px auto;
+            }
+        }
+
+        &.-lower {
+            @include breakpoint-medium-or-larger {
+                margin: 60px auto 20px auto;
+            }
+
+            @include breakpoint-small {
+                margin: 40px auto 15px auto;
+            }
+        }
+    }
+
+    .loser-helper,
+    .winner-helper {
+        display: none;
+    }
+
+    .guess-word-count {
+        color: $blue;
+    }
+
+    .helper-links {
+        font-family: $sans-font;
+        font-weight: $light;
+        text-align: center;
+        color: $mid-gray;
+
+        @include breakpoint-small {
+            font-size: 14px;
+            padding: 0 35px;
+            line-height: 1.7;
+        }
+
+        .reset-game-link,
+        .more-details-link {
+            color: $mid-gray;
+
+            // padding: 10px 0;
+            &:hover {
+                color: lighten($mid-gray, 10);
+            }
+
+            @include breakpoint-small {
+                padding: 5px 0;
+                white-space: nowrap;
+            }
+        }
+    }
+
+    .guess-input-wrapper {
+        max-width: 800px;
+        overflow: hidden;
+        margin: 0 auto 25px auto;
+    }
+
+    .guess-input {
+        display: inline-block;
+        float: left;
+        font-family: $sans-font;
+        font-weight: $bold;
+        font-size: $medium-text-size;
+        color: $mid-gray;
+        padding: 17px 15px 18px 30px;
+        border: 1px solid $light-gray;
+        border-radius: 40px;
+        border-right: none;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+
+        @include breakpoint-medium-or-larger {
+            width: 80%;
+        }
+
+        @include breakpoint-small {
+            width: 75%;
+            font-size: $small-text-size;
+        }
+
+        @include breakpoint-extra-small {
+            padding: 13px 15px 14px 25px;
+            width: 65%;
+        }
+
+        &:focus,
+        &:active {
+            border: 1px solid $blue;
+            border-right: none;
+            outline: none;
+        }
+    }
+
+    .guess-button {
+        @include big-button;
+        float: right;
+        text-align: center;
+        border: 1px solid $blue;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+
+        &:hover,
+        &:focus,
+        &:active {
+            cursor: pointer;
+            background: lighten($blue, 5);
+        }
+
+        @include breakpoint-medium-or-larger {
+            width: 20%;
+            font-size: $medium-text-size;
+            padding: 17px 10px 18px 0;
+        }
+
+        @include breakpoint-small {
+            width: 25%;
+            font-size: $small-text-size;
+            padding: 17px 10px 18px 0;
+        }
+
+        @include breakpoint-extra-small {
+            padding: 13px 10px 14px 0;
+            width: 35%;
+        }
+    }
+
+    .display-rules-trigger {
+        font-family: $sans-font;
+        font-weight: $bold;
+        font-size: $medium-text-size;
+        text-decoration: none;
+        cursor: pointer;
+        width: 44px;
+        height: 44px;
+        line-height: 44px;
+        text-align: center;
+        border-radius: 100%;
+        position: fixed;
+        bottom: 15px;
+        right: 15px;
+        background: $blue;
+        color: white;
+
+        &:hover {
+            box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.15);
+        }
+    }
+
+    .search-results {
+        max-width: 800px;
+        padding: 0 10px 0 10px;
+        margin: 0 auto;
+        font-family: $sans-font;
+        font-size: $small-text-size;
+        line-height: 1.3;
+        color: $dark-gray;
+        font-weight: $light;
+
+        @include breakpoint-small {
+            font-size: 16px;
+        }
+
+        @include breakpoint-extra-small {
+            font-size: 14px;
+        }
+
+        b {
+            font-weight: $medium;
+        }
+    }
+
+    .search-result {
+        margin: 15px 0;
+    }
+
+    .search-result-title,
+    .search-result-snippet {
+        margin-bottom: 3px;
+    }
+
+    .search-result-title>a {
+        color: $blue;
+    }
+
+    .search-result-website {
+        color: $green;
+    }
+}
+
+#win-overlay,
+#lose-overlay {
+    display: none;
+    position: fixed;
+    z-index: $win-lose-overlay-z-index;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#win-overlay {
+    background: $green;
+}
+
+#lose-overlay {
+    background: $red;
+}

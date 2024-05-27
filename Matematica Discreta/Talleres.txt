@@ -1,0 +1,4 @@
+
+-Validación usando el PIM- taller 1
+-Herramientas en línea para validar fórmulas o secuencias-Taller -2
+-Implementando computacionalmente fórmulas  - taller-3

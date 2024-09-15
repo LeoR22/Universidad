@@ -5,7 +5,7 @@
 
     Nota: se debe asegurar que cadSalida sea desplegada y que el formulario
           genere una peticion post a la ruta procesaCuota
-*/ 
+*/
 function crearPagina(nombre, prestamo, meses, interes, cadSalida) {
   return `<!DOCTYPE html>
 <html lang="en">
@@ -13,6 +13,7 @@ function crearPagina(nombre, prestamo, meses, interes, cadSalida) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/default.css">
+        <link rel="stylesheet" href="scripts/asincronismo.js">
     <link rel="icon" type="image/png" sizes="120x120"
       href="https://www.uao.edu.co/wp-content/themes/uao-theme/assets/favicon/apple-icon-120x120.png">
     <title>Simulador Financiero - UAO</title>
@@ -71,7 +72,7 @@ function crearPagina(nombre, prestamo, meses, interes, cadSalida) {
   </body>
 </html>`;
 }
-
+ 
 function calcularCuotaMensual(prestamo, interes, meses) {
   let tasaMensual = interes / 100 / 12;
   let aux = Math.pow(1 + tasaMensual, meses);

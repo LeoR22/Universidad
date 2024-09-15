@@ -84,6 +84,7 @@ app.post('/procesarCuota', (req,res)=> {
     } else {
         const nPage = util.crearPagina(nombre, prestamo, meses, interes, salida);
         res.send(nPage);
+
     }
 });
 

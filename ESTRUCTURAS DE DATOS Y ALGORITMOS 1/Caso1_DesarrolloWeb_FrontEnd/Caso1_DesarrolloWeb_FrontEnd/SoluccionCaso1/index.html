@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/default.css">
+    <script type="module" src="scripts/index.js" defer></script>
+    <link rel="icon" type="image/pgn" sizes="120x120" href="https://www.uao.edu.co/wp-content/themes/uao-theme/assets/favicon/apple-icon-120x120.png">
+    <title>Simulador Financiero - UAO</title>
+</head>
+
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="images/Logo-50-años.png" alt="Logo 50 años">
+        </div>
+        <h1>Simulador de Cuotas</h1>
+    </header>
+    <main>
+        <section>
+            <table>
+                <caption>Simulador de Cuotas</caption>
+                <tr>
+                    <td>Nombre</td>
+                    <td><input type="text" value="Lina Rios" id="elNombre"></td>
+                </tr>
+                <tr>
+                    <td>Préstamo $</td>
+                    <td><input type="number" value="6000000" id="elPrestamo"></td>
+                </tr>
+                <tr>
+                    <td>Meses</td>
+                    <td><input type="number" value="12" id="losMeses"></td>
+                </tr>
+                <tr>
+                    <td>Interés %</td>
+                    <td><input type="number" value="1.5" id="elInteres"></td>
+                </tr>
+            </table><br>
+            <textarea id="laRespuesta" readonly></textarea><br>
+            <select id="laOpcion">
+                <option value="Calcular" selected>Calcular Cuota</option>
+                <option value="ListarTodos">Listar todos</option>
+                <option value="ListarGanan">Listar ganan más</option>
+            </select>
+            <button id="procesar">Ejecutar funcionalidad</button>
+        </section>
+    </main>
+    <footer>
+        <hr>
+        <p>Simulador financiero - UAO</p>
+    </footer>
+</body>
+
+</html>

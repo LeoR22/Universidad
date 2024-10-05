@@ -10,9 +10,8 @@ function recursivos2(A, i, j) {
         return Math.max(A[i], recursivos2(A, i + 1, j)); // Compara el elemento actual con el máximo del resto
     }
 }
-// Arreglo de prueba
+// Ejemplo de uso
 let info = [4, 7, 21, 10, 11, 13, 23];
-// Llama a la función recursiva y muestra el resultado en la consola
 console.log(recursivos2(info, 0, info.length - 1));
 
 //Donde acota es O(lg n)

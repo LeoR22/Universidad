@@ -12,7 +12,7 @@ function recursivos4(A, i, j) {
 // Ejemplo de uso
 let info = [4, 7, 21, 10, 11, 13, 23];
 console.log(recursivos4(info, 0, info.length - 1)); // Muestra el resultado
-//Donde acota es O(lg n)
+
 
 //Resolucion de la concurrencia
 //Donde Donde acota es O(lg n)

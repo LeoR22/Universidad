@@ -1,11 +1,11 @@
 function recursivos4(A, i, j) {
-    // Condición base: Si el índice inicial es mayor que el índice final
+    // Si el índice inicial es mayor que el índice final
     if (i > j) {
-        return i; // Se retorna 0 ya que no hay elementos a sumar
+        return i; // Retorna 0 ya que no hay elementos a sumar
     }else{
-    // Cálculo del punto medio
+    // Se realiza el cálculo del punto medio
         let parte = Math.floor((i + j) / 2);
-    // Llamadas recursivas para sumar la primera mitad y la segunda mitad
+    //  se realiza las llamadas recursivas para sumar la primera mitad y la segunda 
         return recursivos4(A, i, parte - 1) + A[parte] + recursivos4(A, parte + 1, j);
     }
 }

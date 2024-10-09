@@ -1,0 +1,39 @@
+/* crear los selectores indicados */
+body{
+    background-color: lightcyan;
+    font-size: 20px;
+    text-align: center;
+}
+
+header img{
+    width: 450px;
+    border: 1px solid;
+    border-radius: 20px;
+}
+
+textArea{
+    width:600px;
+    height:120px;
+    border: 2px solid;
+}
+
+h1 {
+    color: blue;
+    font-size: 30px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+section p{
+    background-color: lightskyblue;
+    margin: 5px 10px; 
+    padding: 5px 10px;    
+    font-size: 25px;
+    border-radius: 20px;    
+}
+
+table {
+    margin: 0 auto;
+    border: 2px solid;
+    text-align: center;
+}
+

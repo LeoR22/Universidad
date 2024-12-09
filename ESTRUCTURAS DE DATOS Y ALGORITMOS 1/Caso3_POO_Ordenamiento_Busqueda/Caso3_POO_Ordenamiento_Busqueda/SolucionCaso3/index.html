@@ -1,36 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--ajustar para invocar los archivos default.css e index.js-->
     <link rel="stylesheet" href="styles/default.css">
-    <script type="module" src="scripts/main.js" ></script>
+    <script type="module" src="scripts/main.js"></script>
     <title>Caso 3 - UAO</title>
 </head>
+
 <body>
     <header>
-        <img src="Images/Logo-50-años.png" alt="Logo 50 años">        
+        <img src="Images/Logo-50-años.png" alt="Logo 50 años">
         <h1>Caso3 - POO, Ordenamiento y Busqueda</h1>
     </header>
     <main>
         <section>
-            <p>Aplicativo para el ingreso de vehiculos de forma masiva, los cuales pueden ser Vehiculos Publicos con formato: 1 Empresa Placa Modelo SOAT o Vehiculos Particulares con formato: 2 Propietario Placa Modelo SOAT</p>
-            <textarea id="laEntrada">1 Recreativo CBD156 2010 1234 MAFRE 1200000;2 Juan TAB291 2015 4254 SURA 900000;1 Papagayo FDA647 2019 9872 SURA 900000;2 Miriam DAC064 2021 7209 MAFRE 750000;1 Mio BPX870 2021 4903 MAFRE 2500000</textarea>
+            <p>Aplicativo para el ingreso de vehiculos de forma masiva, los cuales pueden ser Vehiculos Publicos con
+                formato: 1 Empresa Placa Modelo SOAT o Vehiculos Particulares con formato: 2 Propietario Placa Modelo
+                SOAT</p>
+            <textarea
+                id="laEntrada">1 Recreativo CBD156 2010 1234 MAFRE 1200000;2 Juan TAB291 2015 4254 SURA 900000;1 Papagayo FDA647 2019 9872 SURA 900000;2 Miriam DAC064 2021 7209 MAFRE 750000;1 Mio BPX870 2021 4903 MAFRE 2500000</textarea>
             <p>Los datos suministrados fueron</p>
             <textarea id="laRespuesta" readonly></textarea><br>
             <select id="laOpcion">
-                <option value="IngresarOrdenar" selected>Ingresar-OrdenarPlaca</option><!-- Opción por defecto -->
+                <option value="IngresarOrdenar" selected>Ingresar-OrdenarPlaca</option>
                 <option value="OrdenarModelo">Ordenar por Modelo</option>
-                <option value="BuscarPlaca">Buscar por Placa</option> 
-            </select> 
-            <button id="procesar">Ejecutar funcionalidad</button>   
+                <option value="BuscarPlaca">Buscar por Placa</option>
+            </select>
+            <button id="procesar">Ejecutar funcionalidad</button>
         </section>
     </main>
     <footer>
         <hr>
-        <p>Creado por el profesor Orlando Arboleda Molina, para el curso de EDyA1 en el Universidad Autónoma de Occidente</p>
+        <p>Gestión de vehiculos - UAO</p>
     </footer>
-</body>
-</html>
+    </body>
+    
+    </html>

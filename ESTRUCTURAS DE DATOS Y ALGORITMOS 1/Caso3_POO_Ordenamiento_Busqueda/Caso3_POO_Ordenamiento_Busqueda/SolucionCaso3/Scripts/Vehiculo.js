@@ -8,23 +8,27 @@
 *  para el curso de EDyA1 en la Universidad Autónoma de Occidente
 */
 //import {Soat} from './Soat.js';
-
 export class Vehiculo {
     constructor(placa, modelo, soat) {
         this.placa = placa;
         this.modelo = modelo;
-        this.suSoat = soat;
-    }  
+        this.soat = soat;
+    }
 
-    // implementar método
     obtenerEstadoEsperado() {
-        let res = "MODERNO";
+        let estado = "No circula";
+        if (this.modelo >= 2020) {
+            estado = "Circulara por 5 años";
+        } else if (this.modelo >= 2015) {
+            estado = "Circulara por 3 años";
+        } else if (this.modelo >= 2010) {
+            estado = "Circulara por 1 años";
+        }
 
-        return res;
+        return estado;
     }
 
     toString() {
-        return "Placa:" + this.placa + "  Modelo:" + this.modelo +
-            "\n Soat:" + this.suSoat.toString();
-    }    
+        return "Placa:" + this.placa + " Modelo:" + this.modelo + " SOAT: " + this.soat.toString();
+    }
 }

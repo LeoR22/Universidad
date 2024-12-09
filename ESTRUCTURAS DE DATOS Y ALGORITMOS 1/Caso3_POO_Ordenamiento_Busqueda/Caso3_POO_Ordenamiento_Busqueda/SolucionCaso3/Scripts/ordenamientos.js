@@ -12,89 +12,70 @@
    funcion auxiliar para el método quicksort por placa
    los parametros son A que es la secuencia; p y r que son las posiciones
 */
- function particion_por_Placa(A, p, r){
+function particion_por_Placa(A, p, r) {
     let x = A[r];
-    let i = p-1;
+    let i = p - 1;
     let aux;
 
-    for (let j = p; j <= r-1; j++)
-    {
-        // Completar la lógica basada en el algoritmo visto.
-        // las Strings se pueden comparar con localeCompare o el operdaor relacional
-
-
+    for (let j = p; j <= r - 1; j++) {
+        if (A[j].placa.localeCompare(x.placa) <= 0) {
+            i++;
+            aux = A[i];
+            A[i] = A[j];
+            A[j] = aux;
+        }
     }
-    // completar la lógica basada en el algoritmo visto
-    aux = A[i+1];
-    A[i+1] = A[r];
+
+    aux = A[i + 1];
+    A[i + 1] = A[r];
     A[r] = aux;
 
-    return i+1;
+    return i + 1;
 }
 
-/*
-   método quicksort por placa
-   los parametros son A que es la secuencia; p y r que son las posiciones
-*/
-function quickSort_por_Placa(A, p, r){
-    if (p < r)
-    {
-        // completar invocaciones del algoritmo visto
-        let q = 0
-
+function quickSort_por_Placa(A, p, r) {
+    if (p < r) {
+        let q = particion_por_Placa(A, p, r);
+        quickSort_por_Placa(A, p, q - 1);
+        quickSort_por_Placa(A, q + 1, r);
     }
 }
 
-
-/*
-   funcion auxiliar para el método quicksort por modelo
-   los parametros son A que es la secuencia; p y r que son las posiciones
-*/
-function particion_por_Modelo(A, p, r){
+function particion_por_Modelo(A, p, r) {
     let x = A[r];
-    let i = p-1;
+    let i = p - 1;
     let aux;
 
-    for (let j = p; j <= r-1; j++)
-    {
-        // Completar la lógica basada en el algoritmo visto.
-
+    for (let j = p; j <= r - 1; j++) {
+        if (A[j].modelo <= x.modelo) {
+            i++;
+            aux = A[i];
+            A[i] = A[j];
+            A[j] = aux;
+        }
     }
-    // completar la lógica basada en el algoritmo visto
-    aux = A[i+1];
-    A[i+1] = A[r];
+
+    aux = A[i + 1];
+    A[i + 1] = A[r];
     A[r] = aux;
 
-    return i+1;
+    return i + 1;
 }
 
-/*
-   método quicksort por modelo
-   los parametros son A que es la secuencia; p y r que son las posiciones
-*/
-function quickSort_por_Modelo(A, p, r){
-    if (p < r)
-    {
-        // completar invocaciones del algoritmo visto
-        let q = 0
-
+function quickSort_por_Modelo(A, p, r) {
+    if (p < r) {
+        let q = particion_por_Modelo(A, p, r);
+        quickSort_por_Modelo(A, p, q - 1);
+        quickSort_por_Modelo(A, q + 1, r);
     }
-} 
+}
 
-/*
-   ordenamiento por placa, usando el método sort
-*/
-function ordena_Placa(A){
-    
-} 
+function ordena_Placa(A) {
+    A.sort((a, b) => a.placa.localeCompare(b.placa));
+}
 
-/*
-   ordenamiento por modelo, usando el método sort
-*/
-function ordena_Modelo(A){
-    
-} 
+function ordena_Modelo(A) {
+    A.sort((a, b) => a.modelo - b.modelo);
+}
 
-
-
-export {quickSort_por_Placa, quickSort_por_Modelo, ordena_Placa, ordena_Modelo};
+export { quickSort_por_Placa, quickSort_por_Modelo, ordena_Placa, ordena_Modelo };

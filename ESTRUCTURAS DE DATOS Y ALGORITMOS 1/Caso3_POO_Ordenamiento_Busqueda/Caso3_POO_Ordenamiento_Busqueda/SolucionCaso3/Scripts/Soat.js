@@ -13,12 +13,12 @@ export class Soat {
         this.numero = numero;
         this.aseguradora = aseguradora;
         this.valor = valor;
-    }  
+    }
 
     toString() {
         return "Numero:" + this.numero +
-            "  Aseguradora:" + this.aseguradora+
+            "  Aseguradora:" + this.aseguradora +
             "  Valor:" + this.valor;
-    }    
+    }
 }
 

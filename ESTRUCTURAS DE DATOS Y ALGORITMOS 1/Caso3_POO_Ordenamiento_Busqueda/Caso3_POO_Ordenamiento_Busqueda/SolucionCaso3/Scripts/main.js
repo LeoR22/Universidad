@@ -7,17 +7,12 @@
 *  Aplicativo para el almacenamiento, ordenamiento y busqueda de Vehiculos, 
 *  para el curso de EDyA1 en la Universidad Autónoma de Occidente
 */
+import { Soat } from './Soat.js';
+import { VehiculoPublico } from './VehiculoPublico.js';
+import { VehiculoParticular } from './VehiculoParticular.js';
+import { quickSort_por_Placa, quickSort_por_Modelo, ordena_Placa, ordena_Modelo } from "./ordenamientos.js";
+import { busquedaBinaria_por_Placa } from "./busqueda.js";
 
-import {Soat} from './Soat.js';
-// incluir imports de VehiculoPublico y VehiculoParticular
-import {VehiculoPublico} from './VehiculoPublico.js';
-import {VehiculoParticular} from './VehiculoParticular.js';
-import {quickSort_por_Placa, quickSort_por_Modelo, ordena_Placa, ordena_Modelo} from "./ordenamientos.js";
-import {busquedaBinaria_por_Placa} from "./busqueda.js";
-
-/* 
-    obtiene referencias al boton y area de texto donde se va a desplegar la salida.
-*/
 const btnFuncionalidad = document.getElementById("procesar");
 const txtA_Respuesta = document.getElementById("laRespuesta");
 
@@ -30,107 +25,76 @@ let bdVehiculos = [
     new VehiculoParticular('Juan Piña','STU 789', 2016, new Soat(789, 'SURA', 1500000)),
     new VehiculoPublico('Transur','PQR 901', 2018, new Soat(901, 'ALLIANZ', 950000))
 ];*/
-let bdVehiculos = []
-
+let bdVehiculos = [];
 let ordenadoPlaca = false;
 let ordenadoModelo = false;
 
-/*
-    addEventListener a btnFuncionalidad para que cuando se de un click se
-    se ejecute la función procesarFuncionalidad 
-*/
-btnFuncionalidad.addEventListener('click',procesarFuncionalidad)
+btnFuncionalidad.addEventListener('click', procesarFuncionalidad)
 
-
-/*
-    funcion procesarFuncionalidad
-    permite ingresar datos, listar,ordenar y buscar
-*/ 
-function procesarFuncionalidad(){ 
+function procesarFuncionalidad() {
     const opcion = document.getElementById("laOpcion").value;
     let res;
-    switch (opcion){
+    switch (opcion) {
         case "IngresarOrdenar":
             let cadEntrada = document.getElementById("laEntrada").value;
-            let losDatos = cadEntrada.split(';')
+            let losDatos = cadEntrada.split(';');
 
-            let laPlaca
-            let elModelo
-            let laEmpresa
-            let elPropietario
-            let elNumero
-            let laAseguradora
-            let elValor
+            let laPlaca, elModelo, laEmpresa, elPropietario, elNumero, laAseguradora, elValor;
 
-            for (let dato of losDatos){
-                let elVehiculo = dato.split(' ')
+            for (let dato of losDatos) {
+                let elVehiculo = dato.split(' ');
 
-                laPlaca = elVehiculo[2]
-                elModelo = parseInt(elVehiculo[3])
-                elNumero = parseInt(elVehiculo[4])
-                laAseguradora = elVehiculo[5]
-                elValor = parseFloat(elVehiculo[6])
-                // crear 
-                let suSoat= new Soat(elNumero,laAseguradora,elValor);
-                if (elVehiculo[0]=='1')
-                {
-                    laEmpresa = elVehiculo[1]
-                    // crea nuevo vehiculo publico y lo almacena en bdVehiculos
-                    
-                }else
-                {
-                    elPropietario = elVehiculo[1]
-                    // crea nuevo vehiculo particular y lo almacena en bdVehiculos
-                    
+                laPlaca = elVehiculo[2];
+                elModelo = parseInt(elVehiculo[3]);
+                elNumero = parseInt(elVehiculo[4]);
+                laAseguradora = elVehiculo[5];
+                elValor = parseFloat(elVehiculo[6]);
+                let suSoat = new Soat(elNumero, laAseguradora, elValor);
+
+                if (elVehiculo[0] == '1') {
+                    laEmpresa = elVehiculo[1];
+                    bdVehiculos.push(new VehiculoPublico(laEmpresa, laPlaca, elModelo, suSoat));
+                } else {
+                    elPropietario = elVehiculo[1];
+                    bdVehiculos.push(new VehiculoParticular(elPropietario, laPlaca, elModelo, suSoat));
                 }
             }
 
-            // realiza ordenamiento usando el quickSort_por_Placa u ordena_Placa
-            
-
+            quickSort_por_Placa(bdVehiculos, 0, bdVehiculos.length - 1);
             ordenadoPlaca = true;
-            ordenadoModelo = false;   
+            ordenadoModelo = false;
 
-            // despliega reporte
             res = 'Los vehiculos son:\n'
-            bdVehiculos.forEach( x => {res+= `${x.toString()} \n Estado: ${x.obtenerEstadoEsperado()}\n\n`} )  
-            txtA_Respuesta.textContent = res; 
+            bdVehiculos.forEach(x => {
+                res += `${x.toString()} \n Estado: ${x.obtenerEstadoEsperado()}\n\n`
+            });
+            txtA_Respuesta.textContent = res;
             break;
         case "OrdenarModelo":
-            if (!ordenadoModelo){
-                // realiza ordenamiento usando el Modelo u ordena_Modelo
-                
+            if (!ordenadoModelo) {
+                quickSort_por_Modelo(bdVehiculos, 0, bdVehiculos.length - 1);
                 ordenadoModelo = true;
-            }   
-
-            // despliega reporte
-            res = 'Los vehiculos son:\n'
-            bdVehiculos.forEach( x => {res+= `${x.toString()} \n Estado: ${x.obtenerEstadoEsperado()}\n\n`} )  
-            txtA_Respuesta.textContent = res;     
-            break;   
-        default:  // buscar por placa
-            console.log(bdVehiculos)
-            if (!ordenadoPlaca){
-                // realiza ordenamiento usando el quickSort_por_Placa u ordena_Placa
-                
-                ordenadoPlaca = true;
-            } 
-
-            console.log(bdVehiculos)
-            let placaBuscada = prompt('Digite la placa a buscar')
-            /* 
-                Invocar al método de busqueda binaria por placa y asignar en la variable res:
-                . No existe el vehiculo <placa>  - cuando NO se encuentra.
-                . cadena con el siguiente formato - cuando SI lo encuentra
-                  <posicion>. <toString del vehiculo> Estado:<obtenerEstadoEsperado del vehiculo>
-            */
-            let posicion = 0
-            if (posicion == -1){
-                res = `No existe el vehiculo ${placaBuscada}`;                
-            }else{
-                res = `${posicion}.  ${bdVehiculos[posicion].toString()} \n Estado:${bdVehiculos[posicion].obtenerEstadoEsperado()}`; 
             }
-  
-            txtA_Respuesta.textContent = res
+
+            res = 'Los vehiculos son:\n'
+            bdVehiculos.forEach(x => {
+                res += `${x.toString()} \n Estado: ${x.obtenerEstadoEsperado()}\n\n`
+            });
+            txtA_Respuesta.textContent = res;
+            break;
+        default:
+            if (!ordenadoPlaca) {
+                quickSort_por_Placa(bdVehiculos, 0, bdVehiculos.length - 1);
+                ordenadoPlaca = true;
+            }
+
+            let placaBuscada = prompt('Digite la placa a buscar');
+            let posicion = busquedaBinaria_por_Placa(bdVehiculos, 0, bdVehiculos.length - 1, placaBuscada);
+            if (posicion == -1) {
+                res = `No existe el vehiculo ${placaBuscada}`;
+            } else {
+                res = `${posicion}.  ${bdVehiculos[posicion].toString()} \n Estado:${bdVehiculos[posicion].obtenerEstadoEsperado()}`;
+            }
+            txtA_Respuesta.textContent = res;
     }
 }

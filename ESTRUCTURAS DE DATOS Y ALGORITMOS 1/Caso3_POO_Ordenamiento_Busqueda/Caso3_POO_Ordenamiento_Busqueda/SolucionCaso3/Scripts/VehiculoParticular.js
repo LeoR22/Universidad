@@ -7,15 +7,15 @@
 *  Es una subclase de la clase Vehiculo, 
 *  para el curso de EDyA1 en la Universidad Autónoma de Occidente
 */
-import {Vehiculo} from './Vehiculo.js';
+import { Vehiculo } from './Vehiculo.js';
 
 export class VehiculoParticular extends Vehiculo {
-    constructor(propietario, placa, modelo, suSoat) {
-        super(placa, modelo, suSoat);
+    constructor(propietario, placa, modelo, soat) {
+        super(placa, modelo, soat);
         this.propietario = propietario;
-    }  
+    }
 
     toString() {
-        return "Propietario:" + this.propietario + "  " + super.toString();
-    }    
+        return "Particular-> Propietario:" + this.propietario + "  " + super.toString();
+    }
 }

@@ -1,0 +1,38 @@
+Endpoints para Cities
+
+Obtener todas las ciudades
+GET http://localhost:8080/api/cities
+
+Obtener ciudad por ID
+GET http://localhost:8080/api/cities/{id}
+
+Crear una nueva ciudad
+POST http://localhost:8080/api/cities
+{
+  "codigo": "01",
+  "nombre": "Popayán",
+  "estado": true,
+  "departmentId": {
+    "id": "ID_DEL_DEPARTAMENTO"
+  }
+}
+
+
+Eliminar ciudad
+DELETE http://localhost:8080/api/cities/{id}
+
+
+Actualizar ciudad
+PUT http://localhost:8080/api/cities/{id}
+{
+  "id": "ID_CIUDAD_EXISTENTE",
+  "codigo": "02",
+  "nombre": "Cali",
+  "estado": true,
+  "departmentId": {
+    "id": "ID_DEL_DEPARTAMENTO"
+  }
+}
+
+
+

@@ -1,0 +1,22 @@
+package com.unab.g04nosql.IService;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.unab.g04nosql.Collection.Users;
+
+public interface IUsersService {
+	// Interfaz que define los servicios para la entidad Users
+	
+	public List<Users> all();
+	// Retorna la lista de todos los usuarios
+	
+	public Optional<Users> findById(String id);
+	// Busca un usuario por ID
+	
+	public Users save(Users users);
+	// Guarda o actualiza un usuario
+	
+	public void delete(String id);
+	// Elimina un usuario por su ID
+}

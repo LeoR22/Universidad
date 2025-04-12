@@ -1,0 +1,14 @@
+package com.unab.g04nosql.IRepository; 
+// Define el paquete donde se encuentra esta interfaz (buenas prácticas de organización)
+
+import org.springframework.data.mongodb.repository.MongoRepository; 
+// Importa la interfaz base de Spring Data para trabajar con MongoDB
+
+import com.unab.g04nosql.Collection.Cities; 
+// Importa la clase de entidad Cities, que representa documentos en la colección 'Cities'
+
+public interface ICitiesRepository extends MongoRepository<Cities, String> {
+    // Define una interfaz que extiende MongoRepository
+    // <Cities, String> indica que se trabaja con documentos de tipo Cities y que el ID es de tipo String
+    // No es necesario definir métodos aquí a menos que quieras consultas personalizadas
+}

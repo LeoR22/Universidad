@@ -1,0 +1,27 @@
+POSTMAN
+
+OBTENER - Obtener todos los registros
+GET http://localhost:8180/api/departments
+GET http://localhost:8180/api/cities
+GET http://localhost:8180/api/users
+GET http://localhost:8180/api/persons
+
+OBTENER - Obtener un registro por ID
+GET http://localhost:8180/api/departments/{id}
+
+PUBLICAR - Crear un nuevo registro
+POST http://localhost:8180/api/departments
+
+Actualizar un registro
+PUT http://localhost:8080/api/departments/{id}
+
+AGREGAR DATOS A LA BASE g_04
+
+Colecciones:
+cities
+
+Departaments
+
+Persons
+
+Users

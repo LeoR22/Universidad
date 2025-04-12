@@ -1,0 +1,25 @@
+package com.unab.g04nosql.IService;
+// Define el paquete donde se ubica esta interfaz (por organización del proyecto)
+
+import java.util.List;
+import java.util.Optional;
+// Se importan las clases necesarias para manejar listas y valores opcionales
+
+import com.unab.g04nosql.Collection.Departments;
+// Se importa la clase Departments, que es la entidad gestionada por este servicio
+
+public interface IDepartmentsService {
+    // Declaración de una interfaz para los servicios relacionados con la entidad Departments
+	
+	public List<Departments> all();
+	// Método para obtener la lista de todos los departamentos
+	
+	public Optional<Departments> findById(String id);
+	// Método para buscar un departamento por su ID (puede o no existir, por eso Optional)
+	
+	public Departments save(Departments departments);
+	// Método para guardar (crear o actualizar) un departamento
+	
+	public void delete(String id);
+	// Método para eliminar un departamento por su ID
+}

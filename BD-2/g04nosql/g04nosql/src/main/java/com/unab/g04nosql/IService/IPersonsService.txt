@@ -1,0 +1,22 @@
+package com.unab.g04nosql.IService;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.unab.g04nosql.Collection.Persons;
+
+public interface IPersonsService {
+	// Interfaz de servicio para la entidad Persons
+	
+	public List<Persons> all();
+	// Devuelve la lista completa de personas registradas
+	
+	public Optional<Persons> findById(String id);
+	// Busca una persona por ID (opcional si no se encuentra)
+	
+	public Persons save(Persons persons);
+	// Guarda una persona (nuevo o edición)
+	
+	public void delete(String id);
+	// Elimina una persona por ID
+}

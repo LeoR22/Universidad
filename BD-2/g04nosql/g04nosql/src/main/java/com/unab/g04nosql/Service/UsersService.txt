@@ -1,0 +1,38 @@
+package com.unab.g04nosql.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.unab.g04nosql.Collection.Users;
+import com.unab.g04nosql.IRepository.IUsersRepository;
+import com.unab.g04nosql.IService.IUsersService;
+
+@Service
+public class UsersService implements IUsersService {
+
+	@Autowired
+	private IUsersRepository repository; // Inyección del repositorio para usuarios
+
+	@Override
+	public List<Users> all() {
+		return repository.findAll(); // Retorna todos los usuarios registrados
+	}
+
+	@Override
+	public Optional<Users> findById(String id) {
+		return repository.findById(id); // Busca un usuario por su ID
+	}
+
+	@Override
+	public Users save(Users users) {
+		return repository.save(users); // Guarda o actualiza un usuario
+	}
+
+	@Override
+	public void delete(String id) {
+		repository.deleteById(id); // Elimina un usuario por ID
+	}
+}

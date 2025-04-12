@@ -1,0 +1,47 @@
+@CrossOrigin(origins = "*") // Permite peticiones desde cualquier origen (CORS habilitado)
+@RestController // Indica que esta clase es un controlador REST
+@RequestMapping("api/cities") // URL base del controlador: http://localhost:8080/api/cities
+public class CitiesController {
+
+	@Autowired // Inyecta automáticamente una implementación de ICitiesService
+	private ICitiesService service;
+
+	@GetMapping // GET http://localhost:8080/api/cities
+	public List<Cities> all() {
+		return service.all(); // Devuelve todas las ciudades
+	}
+
+	@GetMapping("{id}") // GET http://localhost:8080/api/cities/{id}
+	public Optional<Cities> show(@PathVariable String id) {
+		return service.findById(id); // Busca una ciudad por su ID
+	}
+
+	@PostMapping // POST http://localhost:8080/api/cities
+	@ResponseStatus(code = HttpStatus.CREATED)
+	public Cities save(@RequestBody Cities person) {
+		return service.save(person); // Guarda una nueva ciudad
+	}
+
+	@PutMapping("{id}") // PUT http://localhost:8080/api/cities/{id}
+	@ResponseStatus(code = HttpStatus.CREATED)
+	public Cities update(@PathVariable String id, @RequestBody Cities cities) {
+		Optional<Cities> op = service.findById(id); // Busca la ciudad existente
+
+		if (!op.isEmpty()) {
+			Cities citiesUpdate = op.get(); // Obtiene la ciudad existente
+			citiesUpdate.setCodigo(cities.getCodigo());
+			citiesUpdate.setNombre(cities.getNombre());
+			citiesUpdate.setDepartmentId(cities.getDepartmentId());
+			citiesUpdate.setEstado(cities.getEstado());
+			return service.save(citiesUpdate); // Guarda la ciudad actualizada
+		}
+
+		return cities; // Retorna sin cambios si no se encontró
+	}
+
+	@DeleteMapping("{id}") // DELETE http://localhost:8080/api/cities/{id}
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable String id) {
+		service.delete(id); // Elimina la ciudad por ID
+	}
+}

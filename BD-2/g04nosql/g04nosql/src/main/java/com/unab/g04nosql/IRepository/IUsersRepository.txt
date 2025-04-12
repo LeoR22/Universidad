@@ -1,0 +1,12 @@
+package com.unab.g04nosql.IRepository;
+// Indica que la interfaz pertenece al paquete de repositorios
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+// Importa el repositorio base de MongoDB para facilitar operaciones CRUD automáticas
+
+import com.unab.g04nosql.Collection.Users;
+// Importa la entidad Users para vincularla al repositorio
+
+public interface IUsersRepository extends MongoRepository<Users, String> {
+    // Esta interfaz permitirá trabajar con la colección 'Users' sin necesidad de crear métodos CRUD manuales
+}

@@ -1,0 +1,7 @@
+
+Obtener la URI de conexión en Compass ( mongodb://localhost:27017
+
+
+Abra su navegador y acceda a :
+http://localhost:8081
+

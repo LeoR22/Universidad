@@ -1,0 +1,48 @@
+package com.unab.g04nosql.Service;
+// Paquete donde se agrupan las clases de servicio
+
+import java.util.List;
+import java.util.Optional;
+// Importa utilidades para manejar listas y valores opcionales
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+// Anotaciones de Spring: para inyección de dependencias y marcar esta clase como un servicio
+
+import com.unab.g04nosql.Collection.Departments;
+// Importa la entidad Departments
+
+import com.unab.g04nosql.IRepository.IDepartmentsRepository;
+// Importa la interfaz del repositorio de departamentos
+
+import com.unab.g04nosql.IService.IDepartmentsService;
+// Importa la interfaz de servicios de departamentos
+
+@Service
+// Anotación que indica a Spring que esta clase es un "servicio" que será gestionado automáticamente (Bean)
+public class DepartmentsService implements IDepartmentsService {
+	
+	@Autowired
+	// Inyección automática del repositorio que permite acceder a los datos en MongoDB
+	private IDepartmentsRepository repository;
+
+	@Override
+	public List<Departments> all() {
+		return repository.findAll(); // Devuelve la lista completa de departamentos desde la BD
+	}
+
+	@Override
+	public Optional<Departments> findById(String id) {
+		return repository.findById(id); // Busca un departamento por su ID
+	}
+
+	@Override
+	public Departments save(Departments departments) {
+		return repository.save(departments); // Guarda (crea o actualiza) un departamento
+	}
+
+	@Override
+	public void delete(String id) {
+		repository.deleteById(id); // Elimina un departamento según su ID
+	}
+}

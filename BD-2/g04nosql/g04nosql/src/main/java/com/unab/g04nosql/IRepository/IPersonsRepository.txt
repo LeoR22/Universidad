@@ -1,0 +1,13 @@
+package com.unab.g04nosql.IRepository;
+// Define la ubicación de la interfaz dentro de la estructura del proyecto
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+// Importa la clase de repositorio genérico de MongoDB
+
+import com.unab.g04nosql.Collection.Persons;
+// Importa la clase Persons que representa la entidad Persona en MongoDB
+
+public interface IPersonsRepository extends MongoRepository<Persons, String> {
+    // Hereda todos los métodos básicos de persistencia de datos
+    // Aquí podrías agregar métodos como: List<Persons> findByEstado(Boolean estado);
+}

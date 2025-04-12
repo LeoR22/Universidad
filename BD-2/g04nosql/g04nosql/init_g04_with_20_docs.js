@@ -1,0 +1,169 @@
+use g_04
+
+db.createCollection("Departments")
+
+db.Departments.insertOne({"_id": "4d58d3b0-4261-4026-a9fc-4fbcb0da0e43", "codigo": "100", "nombre": "Departamento 1", "estado": true})
+
+db.Departments.insertOne({"_id": "7fe3378d-ebb7-4fe4-b816-9d81584c144a", "codigo": "101", "nombre": "Departamento 2", "estado": true})
+
+db.Departments.insertOne({"_id": "6bed42a8-8414-419e-9932-7e9ddba770ab", "codigo": "102", "nombre": "Departamento 3", "estado": true})
+
+db.Departments.insertOne({"_id": "0119aa01-7878-4e8e-8abd-57bbd6a475f0", "codigo": "103", "nombre": "Departamento 4", "estado": true})
+
+db.Departments.insertOne({"_id": "b589e67a-6362-45f0-9b49-e4ccf413c5b3", "codigo": "104", "nombre": "Departamento 5", "estado": true})
+
+db.Departments.insertOne({"_id": "deac2b04-0a9b-49ad-8d4c-06d5e58e6b62", "codigo": "105", "nombre": "Departamento 6", "estado": true})
+
+db.Departments.insertOne({"_id": "a2cc24ea-0542-4a27-b05d-05ceddc4edb1", "codigo": "106", "nombre": "Departamento 7", "estado": true})
+
+db.Departments.insertOne({"_id": "de161fa4-f8d1-419a-8a58-66da3979e248", "codigo": "107", "nombre": "Departamento 8", "estado": true})
+
+db.Departments.insertOne({"_id": "d8649b9b-aa45-42b7-b806-70edff3dee11", "codigo": "108", "nombre": "Departamento 9", "estado": true})
+
+db.Departments.insertOne({"_id": "9791decc-5e9d-477e-bd4c-f0859976aa4f", "codigo": "109", "nombre": "Departamento 10", "estado": true})
+
+db.Departments.insertOne({"_id": "4e6ec9c1-ed8d-4983-9c34-3a9d0a6c53ec", "codigo": "110", "nombre": "Departamento 11", "estado": true})
+
+db.Departments.insertOne({"_id": "f3406b50-2dd5-4439-b648-da3785f97853", "codigo": "111", "nombre": "Departamento 12", "estado": true})
+
+db.Departments.insertOne({"_id": "c4fc19b4-161b-4330-a650-7db9c315483a", "codigo": "112", "nombre": "Departamento 13", "estado": true})
+
+db.Departments.insertOne({"_id": "2092c853-ea6c-4c32-9a51-f3b8d2d1b647", "codigo": "113", "nombre": "Departamento 14", "estado": true})
+
+db.Departments.insertOne({"_id": "8976adb5-cf7c-4617-9274-d0730da3975d", "codigo": "114", "nombre": "Departamento 15", "estado": true})
+
+db.Departments.insertOne({"_id": "ffca0657-c1b4-4a72-9b07-8ce70b11980a", "codigo": "115", "nombre": "Departamento 16", "estado": true})
+
+db.Departments.insertOne({"_id": "62405cba-6a94-410b-9a30-7316ca42f4f2", "codigo": "116", "nombre": "Departamento 17", "estado": true})
+
+db.Departments.insertOne({"_id": "17c62eac-17eb-4fd8-99f2-514edf094003", "codigo": "117", "nombre": "Departamento 18", "estado": true})
+
+db.Departments.insertOne({"_id": "217fa688-4da2-438c-a505-f60cea5c23f5", "codigo": "118", "nombre": "Departamento 19", "estado": true})
+
+db.Departments.insertOne({"_id": "8ff6b964-55f3-427c-bf87-4c7f044e8476", "codigo": "119", "nombre": "Departamento 20", "estado": true})
+
+db.createCollection("Cities")
+
+db.Cities.insertOne({"_id": "cbaac13f-98ee-4745-b208-645f9e864622", "codigo": "200", "nombre": "Ciudad 1", "estado": true, "departmentId": "4d58d3b0-4261-4026-a9fc-4fbcb0da0e43"})
+
+db.Cities.insertOne({"_id": "c1346ca1-10f1-4547-88ec-cf06071f684e", "codigo": "201", "nombre": "Ciudad 2", "estado": true, "departmentId": "7fe3378d-ebb7-4fe4-b816-9d81584c144a"})
+
+db.Cities.insertOne({"_id": "0d953f72-7c86-461d-b832-941703159606", "codigo": "202", "nombre": "Ciudad 3", "estado": true, "departmentId": "6bed42a8-8414-419e-9932-7e9ddba770ab"})
+
+db.Cities.insertOne({"_id": "5a9d7713-aa7b-4db1-8093-5f7243f5d70f", "codigo": "203", "nombre": "Ciudad 4", "estado": true, "departmentId": "0119aa01-7878-4e8e-8abd-57bbd6a475f0"})
+
+db.Cities.insertOne({"_id": "cf0bafd0-564b-4d72-9a1e-d2f40e7382c7", "codigo": "204", "nombre": "Ciudad 5", "estado": true, "departmentId": "b589e67a-6362-45f0-9b49-e4ccf413c5b3"})
+
+db.Cities.insertOne({"_id": "e0eda92a-faaf-4c46-a3ec-e8d2b0cb969a", "codigo": "205", "nombre": "Ciudad 6", "estado": true, "departmentId": "deac2b04-0a9b-49ad-8d4c-06d5e58e6b62"})
+
+db.Cities.insertOne({"_id": "955089aa-a9a3-40da-82a4-60546be44e39", "codigo": "206", "nombre": "Ciudad 7", "estado": true, "departmentId": "a2cc24ea-0542-4a27-b05d-05ceddc4edb1"})
+
+db.Cities.insertOne({"_id": "1e3a071c-9f41-4a4d-b92d-8cfdc66536e5", "codigo": "207", "nombre": "Ciudad 8", "estado": true, "departmentId": "de161fa4-f8d1-419a-8a58-66da3979e248"})
+
+db.Cities.insertOne({"_id": "44f1877c-33dd-4240-a639-598a85ac97dd", "codigo": "208", "nombre": "Ciudad 9", "estado": true, "departmentId": "d8649b9b-aa45-42b7-b806-70edff3dee11"})
+
+db.Cities.insertOne({"_id": "36eb4963-1c7f-4d08-8bfd-e118bbf90a0b", "codigo": "209", "nombre": "Ciudad 10", "estado": true, "departmentId": "9791decc-5e9d-477e-bd4c-f0859976aa4f"})
+
+db.Cities.insertOne({"_id": "d5e3ab70-35e1-4aa5-8fe2-bfd6401d03ff", "codigo": "210", "nombre": "Ciudad 11", "estado": true, "departmentId": "4e6ec9c1-ed8d-4983-9c34-3a9d0a6c53ec"})
+
+db.Cities.insertOne({"_id": "5726ac0f-b17c-4fba-8d18-3a51fcde95f2", "codigo": "211", "nombre": "Ciudad 12", "estado": true, "departmentId": "f3406b50-2dd5-4439-b648-da3785f97853"})
+
+db.Cities.insertOne({"_id": "0ac6b291-34e6-425c-b560-19981f559700", "codigo": "212", "nombre": "Ciudad 13", "estado": true, "departmentId": "c4fc19b4-161b-4330-a650-7db9c315483a"})
+
+db.Cities.insertOne({"_id": "24846d58-f12c-4d8d-a639-dd6bbb0bad72", "codigo": "213", "nombre": "Ciudad 14", "estado": true, "departmentId": "2092c853-ea6c-4c32-9a51-f3b8d2d1b647"})
+
+db.Cities.insertOne({"_id": "5022f72b-fc0e-4038-8c42-e9e261250063", "codigo": "214", "nombre": "Ciudad 15", "estado": true, "departmentId": "8976adb5-cf7c-4617-9274-d0730da3975d"})
+
+db.Cities.insertOne({"_id": "3096ee32-9e31-480a-9ccc-1ce4c2376893", "codigo": "215", "nombre": "Ciudad 16", "estado": true, "departmentId": "ffca0657-c1b4-4a72-9b07-8ce70b11980a"})
+
+db.Cities.insertOne({"_id": "6da233df-ce36-4ac6-8b59-5ab3373e4a8d", "codigo": "216", "nombre": "Ciudad 17", "estado": true, "departmentId": "62405cba-6a94-410b-9a30-7316ca42f4f2"})
+
+db.Cities.insertOne({"_id": "d3070e62-fefb-4442-8b45-47c57c13bbaf", "codigo": "217", "nombre": "Ciudad 18", "estado": true, "departmentId": "17c62eac-17eb-4fd8-99f2-514edf094003"})
+
+db.Cities.insertOne({"_id": "6e459106-76e8-4abf-b5d6-57123557a9c4", "codigo": "218", "nombre": "Ciudad 19", "estado": true, "departmentId": "217fa688-4da2-438c-a505-f60cea5c23f5"})
+
+db.Cities.insertOne({"_id": "f82effb8-b90f-4d55-b012-f5256290ff68", "codigo": "219", "nombre": "Ciudad 20", "estado": true, "departmentId": "8ff6b964-55f3-427c-bf87-4c7f044e8476"})
+
+db.createCollection("Users")
+
+db.Users.insertOne({"_id": "8c42d99f-73eb-4396-ae8e-71aafbe3860a", "usuario": "user1", "contrasenia": "pass1", "estado": true})
+
+db.Users.insertOne({"_id": "c0125626-b440-4026-9487-cceb38ebb919", "usuario": "user2", "contrasenia": "pass2", "estado": true})
+
+db.Users.insertOne({"_id": "5c6c4ed3-ad88-4cf6-b922-4fc4c5a518e5", "usuario": "user3", "contrasenia": "pass3", "estado": true})
+
+db.Users.insertOne({"_id": "4b8e7981-ef29-4264-87df-bfb34f4d58d5", "usuario": "user4", "contrasenia": "pass4", "estado": true})
+
+db.Users.insertOne({"_id": "3d57abb9-0215-4ef0-ba65-a2d46a9f12ae", "usuario": "user5", "contrasenia": "pass5", "estado": true})
+
+db.Users.insertOne({"_id": "84fec247-e9ba-4b6c-a875-a68a30137ed4", "usuario": "user6", "contrasenia": "pass6", "estado": true})
+
+db.Users.insertOne({"_id": "1234b4a4-6a24-4c0b-90f3-10b5a0e89016", "usuario": "user7", "contrasenia": "pass7", "estado": true})
+
+db.Users.insertOne({"_id": "8092ebd9-7726-4bad-8f85-8389501dded2", "usuario": "user8", "contrasenia": "pass8", "estado": true})
+
+db.Users.insertOne({"_id": "265598a5-1890-4b13-996b-f4638d584343", "usuario": "user9", "contrasenia": "pass9", "estado": true})
+
+db.Users.insertOne({"_id": "878f0be4-0c26-4c9f-8854-4b2db476f598", "usuario": "user10", "contrasenia": "pass10", "estado": true})
+
+db.Users.insertOne({"_id": "e8242150-2a2f-4929-9bf1-0acfc0cb74c8", "usuario": "user11", "contrasenia": "pass11", "estado": true})
+
+db.Users.insertOne({"_id": "2ed5932f-fbd0-42fc-aa42-e69872e03108", "usuario": "user12", "contrasenia": "pass12", "estado": true})
+
+db.Users.insertOne({"_id": "4e8fa3ab-4dde-4125-baca-095da9285091", "usuario": "user13", "contrasenia": "pass13", "estado": true})
+
+db.Users.insertOne({"_id": "f283ac58-bc6a-456c-9333-20abd4d0dd63", "usuario": "user14", "contrasenia": "pass14", "estado": true})
+
+db.Users.insertOne({"_id": "baa44610-9ada-46f5-b78b-03d17b2b1d27", "usuario": "user15", "contrasenia": "pass15", "estado": true})
+
+db.Users.insertOne({"_id": "ca6c7cd4-5460-46b6-b0d1-468b3a16ddd3", "usuario": "user16", "contrasenia": "pass16", "estado": true})
+
+db.Users.insertOne({"_id": "afb3ec0c-3020-4228-9407-234ec9efd9e0", "usuario": "user17", "contrasenia": "pass17", "estado": true})
+
+db.Users.insertOne({"_id": "27b1f817-4101-4c4b-8e1f-917303d3a949", "usuario": "user18", "contrasenia": "pass18", "estado": true})
+
+db.Users.insertOne({"_id": "b4251306-376c-4b54-8073-aabfdee45722", "usuario": "user19", "contrasenia": "pass19", "estado": true})
+
+db.Users.insertOne({"_id": "f646993f-b1db-423f-aeea-ca2e90883831", "usuario": "user20", "contrasenia": "pass20", "estado": true})
+
+db.createCollection("Persons")
+
+db.Persons.insertOne({"tipoDocumento": "CC", "documento": "10000000", "primerNombre": "Nombre1", "segundoNombre": "Segundo1", "primerApellido": "Apellido1", "segundoApellido": "ApellidoB1", "correo": "persona1@mail.com", "telefono": "3100000000", "fechaNacimiento": "1990-01-15T00:00:00", "direccion": "Calle 1 # 01-00", "estado": true, "usuarioId": "8c42d99f-73eb-4396-ae8e-71aafbe3860a", "ciudadId": "cbaac13f-98ee-4745-b208-645f9e864622"})
+
+db.Persons.insertOne({"tipoDocumento": "CC", "documento": "10000001", "primerNombre": "Nombre2", "segundoNombre": "Segundo2", "primerApellido": "Apellido2", "segundoApellido": "ApellidoB2", "correo": "persona2@mail.com", "telefono": "3100000001", "fechaNacimiento": "1991-01-15T00:00:00", "direccion": "Calle 2 # 02-00", "estado": true, "usuarioId": "c0125626-b440-4026-9487-cceb38ebb919", "ciudadId": "c1346ca1-10f1-4547-88ec-cf06071f684e"})
+
+db.Persons.insertOne({"tipoDocumento": "CC", "documento": "10000002", "primerNombre": "Nombre3", "segundoNombre": "Segundo3", "primerApellido": "Apellido3", "segundoApellido": "ApellidoB3", "correo": "persona3@mail.com", "telefono": "3100000002", "fechaNacimiento": "1992-01-15T00:00:00", "direccion": "Calle 3 # 03-00", "estado": true, "usuarioId": "5c6c4ed3-ad88-4cf6-b922-4fc4c5a518e5", "ciudadId": "0d953f72-7c86-461d-b832-941703159606"})
+
+db.Persons.insertOne({"tipoDocumento": "CC", "documento": "10000003", "primerNombre": "Nombre4", "segundoNombre": "Segundo4", "primerApellido": "Apellido4", "segundoApellido": "ApellidoB4", "correo": "persona4@mail.com", "telefono": "3100000003", "fechaNacimiento": "1993-01-15T00:00:00", "direccion": "Calle 4 # 04-00", "estado": true, "usuarioId": "4b8e7981-ef29-4264-87df-bfb34f4d58d5", "ciudadId": "5a9d7713-aa7b-4db1-8093-5f7243f5d70f"})
+
+db.Persons.insertOne({"tipoDocumento": "CC", "documento": "10000004", "primerNombre": "Nombre5", "segundoNombre": "Segundo5", "primerApellido": "Apellido5", "segundoApellido": "ApellidoB5", "correo": "persona5@mail.com", "telefono": "3100000004", "fechaNacimiento": "1994-01-15T00:00:00", "direccion": "Calle 5 # 05-00", "estado": true, "usuarioId": "3d57abb9-0215-4ef0-ba65-a2d46a9f12ae", "ciudadId": "cf0bafd0-564b-4d72-9a1e-d2f40e7382c7"})
+
+db.Persons.insertOne({"tipoDocumento": "CC", "documento": "10000005", "primerNombre": "Nombre6", "segundoNombre": "Segundo6", "primerApellido": "Apellido6", "segundoApellido": "ApellidoB6", "correo": "persona6@mail.com", "telefono": "3100000005", "fechaNacimiento": "1995-01-15T00:00:00", "direccion": "Calle 6 # 06-00", "estado": true, "usuarioId": "84fec247-e9ba-4b6c-a875-a68a30137ed4", "ciudadId": "e0eda92a-faaf-4c46-a3ec-e8d2b0cb969a"})
+
+db.Persons.insertOne({"tipoDocumento": "CC", "documento": "10000006", "primerNombre": "Nombre7", "segundoNombre": "Segundo7", "primerApellido": "Apellido7", "segundoApellido": "ApellidoB7", "correo": "persona7@mail.com", "telefono": "3100000006", "fechaNacimiento": "1996-01-15T00:00:00", "direccion": "Calle 7 # 07-00", "estado": true, "usuarioId": "1234b4a4-6a24-4c0b-90f3-10b5a0e89016", "ciudadId": "955089aa-a9a3-40da-82a4-60546be44e39"})
+
+db.Persons.insertOne({"tipoDocumento": "CC", "documento": "10000007", "primerNombre": "Nombre8", "segundoNombre": "Segundo8", "primerApellido": "Apellido8", "segundoApellido": "ApellidoB8", "correo": "persona8@mail.com", "telefono": "3100000007", "fechaNacimiento": "1997-01-15T00:00:00", "direccion": "Calle 8 # 08-00", "estado": true, "usuarioId": "8092ebd9-7726-4bad-8f85-8389501dded2", "ciudadId": "1e3a071c-9f41-4a4d-b92d-8cfdc66536e5"})
+
+db.Persons.insertOne({"tipoDocumento": "CC", "documento": "10000008", "primerNombre": "Nombre9", "segundoNombre": "Segundo9", "primerApellido": "Apellido9", "segundoApellido": "ApellidoB9", "correo": "persona9@mail.com", "telefono": "3100000008", "fechaNacimiento": "1998-01-15T00:00:00", "direccion": "Calle 9 # 09-00", "estado": true, "usuarioId": "265598a5-1890-4b13-996b-f4638d584343", "ciudadId": "44f1877c-33dd-4240-a639-598a85ac97dd"})
+
+db.Persons.insertOne({"tipoDocumento": "CC", "documento": "10000009", "primerNombre": "Nombre10", "segundoNombre": "Segundo10", "primerApellido": "Apellido10", "segundoApellido": "ApellidoB10", "correo": "persona10@mail.com", "telefono": "3100000009", "fechaNacimiento": "1999-01-15T00:00:00", "direccion": "Calle 10 # 010-00", "estado": true, "usuarioId": "878f0be4-0c26-4c9f-8854-4b2db476f598", "ciudadId": "36eb4963-1c7f-4d08-8bfd-e118bbf90a0b"})
+
+db.Persons.insertOne({"tipoDocumento": "CC", "documento": "10000010", "primerNombre": "Nombre11", "segundoNombre": "Segundo11", "primerApellido": "Apellido11", "segundoApellido": "ApellidoB11", "correo": "persona11@mail.com", "telefono": "3100000010", "fechaNacimiento": "1990-01-15T00:00:00", "direccion": "Calle 11 # 011-00", "estado": true, "usuarioId": "e8242150-2a2f-4929-9bf1-0acfc0cb74c8", "ciudadId": "d5e3ab70-35e1-4aa5-8fe2-bfd6401d03ff"})
+
+db.Persons.insertOne({"tipoDocumento": "CC", "documento": "10000011", "primerNombre": "Nombre12", "segundoNombre": "Segundo12", "primerApellido": "Apellido12", "segundoApellido": "ApellidoB12", "correo": "persona12@mail.com", "telefono": "3100000011", "fechaNacimiento": "1991-01-15T00:00:00", "direccion": "Calle 12 # 012-00", "estado": true, "usuarioId": "2ed5932f-fbd0-42fc-aa42-e69872e03108", "ciudadId": "5726ac0f-b17c-4fba-8d18-3a51fcde95f2"})
+
+db.Persons.insertOne({"tipoDocumento": "CC", "documento": "10000012", "primerNombre": "Nombre13", "segundoNombre": "Segundo13", "primerApellido": "Apellido13", "segundoApellido": "ApellidoB13", "correo": "persona13@mail.com", "telefono": "3100000012", "fechaNacimiento": "1992-01-15T00:00:00", "direccion": "Calle 13 # 013-00", "estado": true, "usuarioId": "4e8fa3ab-4dde-4125-baca-095da9285091", "ciudadId": "0ac6b291-34e6-425c-b560-19981f559700"})
+
+db.Persons.insertOne({"tipoDocumento": "CC", "documento": "10000013", "primerNombre": "Nombre14", "segundoNombre": "Segundo14", "primerApellido": "Apellido14", "segundoApellido": "ApellidoB14", "correo": "persona14@mail.com", "telefono": "3100000013", "fechaNacimiento": "1993-01-15T00:00:00", "direccion": "Calle 14 # 014-00", "estado": true, "usuarioId": "f283ac58-bc6a-456c-9333-20abd4d0dd63", "ciudadId": "24846d58-f12c-4d8d-a639-dd6bbb0bad72"})
+
+db.Persons.insertOne({"tipoDocumento": "CC", "documento": "10000014", "primerNombre": "Nombre15", "segundoNombre": "Segundo15", "primerApellido": "Apellido15", "segundoApellido": "ApellidoB15", "correo": "persona15@mail.com", "telefono": "3100000014", "fechaNacimiento": "1994-01-15T00:00:00", "direccion": "Calle 15 # 015-00", "estado": true, "usuarioId": "baa44610-9ada-46f5-b78b-03d17b2b1d27", "ciudadId": "5022f72b-fc0e-4038-8c42-e9e261250063"})
+
+db.Persons.insertOne({"tipoDocumento": "CC", "documento": "10000015", "primerNombre": "Nombre16", "segundoNombre": "Segundo16", "primerApellido": "Apellido16", "segundoApellido": "ApellidoB16", "correo": "persona16@mail.com", "telefono": "3100000015", "fechaNacimiento": "1995-01-15T00:00:00", "direccion": "Calle 16 # 016-00", "estado": true, "usuarioId": "ca6c7cd4-5460-46b6-b0d1-468b3a16ddd3", "ciudadId": "3096ee32-9e31-480a-9ccc-1ce4c2376893"})
+
+db.Persons.insertOne({"tipoDocumento": "CC", "documento": "10000016", "primerNombre": "Nombre17", "segundoNombre": "Segundo17", "primerApellido": "Apellido17", "segundoApellido": "ApellidoB17", "correo": "persona17@mail.com", "telefono": "3100000016", "fechaNacimiento": "1996-01-15T00:00:00", "direccion": "Calle 17 # 017-00", "estado": true, "usuarioId": "afb3ec0c-3020-4228-9407-234ec9efd9e0", "ciudadId": "6da233df-ce36-4ac6-8b59-5ab3373e4a8d"})
+
+db.Persons.insertOne({"tipoDocumento": "CC", "documento": "10000017", "primerNombre": "Nombre18", "segundoNombre": "Segundo18", "primerApellido": "Apellido18", "segundoApellido": "ApellidoB18", "correo": "persona18@mail.com", "telefono": "3100000017", "fechaNacimiento": "1997-01-15T00:00:00", "direccion": "Calle 18 # 018-00", "estado": true, "usuarioId": "27b1f817-4101-4c4b-8e1f-917303d3a949", "ciudadId": "d3070e62-fefb-4442-8b45-47c57c13bbaf"})
+
+db.Persons.insertOne({"tipoDocumento": "CC", "documento": "10000018", "primerNombre": "Nombre19", "segundoNombre": "Segundo19", "primerApellido": "Apellido19", "segundoApellido": "ApellidoB19", "correo": "persona19@mail.com", "telefono": "3100000018", "fechaNacimiento": "1998-01-15T00:00:00", "direccion": "Calle 19 # 019-00", "estado": true, "usuarioId": "b4251306-376c-4b54-8073-aabfdee45722", "ciudadId": "6e459106-76e8-4abf-b5d6-57123557a9c4"})
+
+db.Persons.insertOne({"tipoDocumento": "CC", "documento": "10000019", "primerNombre": "Nombre20", "segundoNombre": "Segundo20", "primerApellido": "Apellido20", "segundoApellido": "ApellidoB20", "correo": "persona20@mail.com", "telefono": "3100000019", "fechaNacimiento": "1999-01-15T00:00:00", "direccion": "Calle 20 # 020-00", "estado": true, "usuarioId": "f646993f-b1db-423f-aeea-ca2e90883831", "ciudadId": "f82effb8-b90f-4d55-b012-f5256290ff68"})

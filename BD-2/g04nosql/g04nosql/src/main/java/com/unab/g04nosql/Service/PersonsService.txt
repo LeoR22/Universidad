@@ -1,0 +1,38 @@
+package com.unab.g04nosql.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.unab.g04nosql.Collection.Persons;
+import com.unab.g04nosql.IRepository.IPersonsRepository;
+import com.unab.g04nosql.IService.IPersonsService;
+
+@Service
+public class PersonsService implements IPersonsService {
+
+	@Autowired
+	private IPersonsRepository repository; // Repositorio de acceso a la colección Persons
+
+	@Override
+	public List<Persons> all() {
+		return repository.findAll(); // Retorna todas las personas almacenadas
+	}
+
+	@Override
+	public Optional<Persons> findById(String id) {
+		return repository.findById(id); // Busca una persona por ID
+	}
+
+	@Override
+	public Persons save(Persons persons) {
+		return repository.save(persons); // Guarda o actualiza una persona
+	}
+
+	@Override
+	public void delete(String id) {
+		repository.deleteById(id); // Elimina una persona por su ID
+	}
+}

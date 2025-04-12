@@ -1,0 +1,91 @@
+// Vox MongoDB Schema for herramienta dbdiagram.io
+
+Note {
+  'Design Rationale': 'MongoDB was chosen for its scalability and flexible schema, ideal for a social media app with varying user profiles and posts. References are used for Comments and Likes to support high write volumes and independent updates. Denormalized counts (likes_count, followers_count) optimize read performance. Indexes ensure efficient queries for user posts and relationships.'
+}
+
+Table Users {
+  user_id string [pk, note: 'Unique user ID']
+  name string [note: 'User display name']
+  email string [note: 'User email for authentication']
+  password string [note: 'Hashed password']
+  bio string [note: 'User biography']
+  profile_image_url string [note: 'URL for profile image']
+  cover_image_url string [note: 'URL for cover image']
+  created_at datetime [note: 'Account creation timestamp']
+  following_count int [note: 'Number of users followed']
+  followers_count int [note: 'Number of followers']
+  indexes {
+    email [unique, note: 'Unique index for email']
+  }
+}
+
+Table Posts {
+  _id string [pk, note: 'Unique post ID']
+  user_id string [ref: > Users.user_id, note: 'ID of the user who posted']
+  content string [note: 'Text content of the post']
+  image_url string [note: 'URL for post image']
+  created_at datetime [note: 'Post creation timestamp']
+  likes_count int [note: 'Number of likes']
+  comments_count int [note: 'Number of comments']
+  indexes {
+    user_id [note: 'Index for user posts queries']
+    created_at [note: 'Index for sorting posts by date']
+  }
+}
+
+Table Follows {
+  follower_id string [ref: > Users.user_id, note: 'ID of the follower']
+  followed_id string [ref: > Users.user_id, note: 'ID of the user being followed']
+  created_at datetime [note: 'Follow timestamp']
+  indexes {
+    (follower_id, followed_id) [pk, unique, note: 'Unique follower-followed pair']
+  }
+}
+
+Table Likes {
+  user_id string [ref: > Users.user_id, note: 'ID of the user who liked']
+  post_id string [ref: > Posts._id, note: 'ID of the liked post']
+  created_at datetime [note: 'Like timestamp']
+  indexes {
+    (user_id, post_id) [pk, unique, note: 'Unique user-post like']
+  }
+}
+
+Table Comments {
+  _id string [pk, note: 'Unique comment ID']
+  post_id string [ref: > Posts._id, note: 'ID of the commented post']
+  user_id string [ref: > Users.user_id, note: 'ID of the commenter']
+  content string [note: 'Comment text']
+  created_at datetime [note: 'Comment timestamp']
+  indexes {
+    post_id [note: 'Index for post comments queries']
+    created_at [note: 'Index for sorting comments by date']
+  }
+}
+
+Table Messages {
+  _id string [pk, note: 'Unique message ID']
+  sender_id string [ref: > Users.user_id, note: 'ID of the sender']
+  receiver_id string [ref: > Users.user_id, note: 'ID of the receiver']
+  content string [note: 'Message text']
+  created_at datetime [note: 'Message timestamp']
+  indexes {
+    sender_id [note: 'Index for sender queries']
+    receiver_id [note: 'Index for receiver queries']
+    created_at [note: 'Index for sorting messages']
+  }
+}
+
+Table Notifications {
+  _id string [pk, note: 'Unique notification ID']
+  user_id string [ref: > Users.user_id, note: 'ID of the notified user']
+  actor_id string [ref: > Users.user_id, note: 'ID of the user who triggered the notification']
+  type string [note: 'Type of notification (e.g., like, follow, comment)']
+  post_id string [ref: - Posts._id, note: 'ID of the related post, if applicable']
+  created_at datetime [note: 'Notification timestamp']
+  indexes {
+    user_id [note: 'Index for user notifications']
+    created_at [note: 'Index for sorting notifications']
+  }
+}

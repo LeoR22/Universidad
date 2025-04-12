@@ -1,0 +1,11 @@
+Al extensor MongoRepository, cada interfaz:
+
+Habilita automáticamente operaciones como:
+
+findAll()– traer todos los registros
+
+findById(id)– buscar por ID
+
+save(entity)– crear o actualizar
+
+deleteById(id)– eliminar por ID

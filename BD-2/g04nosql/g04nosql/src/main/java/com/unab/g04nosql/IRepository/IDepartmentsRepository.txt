@@ -1,0 +1,13 @@
+package com.unab.g04nosql.IRepository;
+// Paquete que agrupa las interfaces de repositorio
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+// Permite usar operaciones CRUD sin escribirlas manualmente
+
+import com.unab.g04nosql.Collection.Departments;
+// Importa la clase Departments que representa la colección en MongoDB
+
+public interface IDepartmentsRepository extends MongoRepository<Departments, String> {
+    // Al extender MongoRepository se heredan métodos como: findAll(), findById(), save(), deleteById(), etc.
+    // El primer parámetro es la clase entidad y el segundo es el tipo del ID (String en este caso)
+}

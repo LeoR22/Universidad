@@ -1,0 +1,46 @@
+@CrossOrigin(origins = "*")
+@RestController
+@RequestMapping("api/departments")
+public class DepartmentsController {
+
+	@Autowired
+	private IDepartmentsService service;
+
+	@GetMapping
+	public List<Departments> all() {
+		return service.all(); // Devuelve todos los departamentos
+	}
+
+	@GetMapping("{id}")
+	public Optional<Departments> show(@PathVariable String id) {
+		return service.findById(id); // Devuelve un departamento por su ID
+	}
+
+	@PostMapping
+	@ResponseStatus(code = HttpStatus.CREATED)
+	public Departments save(@RequestBody Departments person) {
+		return service.save(person); // Guarda un nuevo departamento
+	}
+
+	@PutMapping("{id}")
+	@ResponseStatus(code = HttpStatus.CREATED)
+	public Departments update(@PathVariable String id, @RequestBody Departments departments) {
+		Optional<Departments> op = service.findById(id);
+
+		if (!op.isEmpty()) {
+			Departments departmentsUpdate = op.get();
+			departmentsUpdate.setCodigo(departments.getCodigo());
+			departmentsUpdate.setNombre(departments.getNombre());
+			departmentsUpdate.setEstado(departments.getEstado());
+			return service.save(departmentsUpdate); // Guarda la edición
+		}
+
+		return departments;
+	}
+
+	@DeleteMapping("{id}")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable String id) {
+		service.delete(id); // Elimina un departamento
+	}
+}

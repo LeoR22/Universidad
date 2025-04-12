@@ -1,0 +1,5 @@
+Controlador llama al Servicio .
+
+Service implementa la lógica (aunque aquí solo redirige al repositorio).
+
+El repositorio interactúa directamente con MongoDB.

@@ -1,0 +1,22 @@
+package com.unab.g04nosql.IService;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.unab.g04nosql.Collection.Cities;
+
+public interface ICitiesService {
+	// Interfaz que define los servicios de la entidad Cities
+	
+	public List<Cities> all();
+	// Retorna todas las ciudades registradas
+	
+	public Optional<Cities> findById(String id);
+	// Busca una ciudad específica por su ID
+	
+	public Cities save(Cities cities);
+	// Guarda (crear o actualizar) una ciudad
+	
+	public void delete(String id);
+	// Elimina una ciudad por su ID
+}

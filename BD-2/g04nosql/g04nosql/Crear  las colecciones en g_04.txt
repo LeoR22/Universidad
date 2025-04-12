@@ -1,0 +1,50 @@
+use g_04
+
+db.createCollection("Cities")
+db.createCollection("Departments")
+db.createCollection("Persons")
+db.createCollection("Users")
+
+Insertar documentos de prueba
+
+Cities
+db.Cities.insertOne({
+  codigo: "001",
+  nombre: "Popayán",
+  estado: true,
+  departmentId: ObjectId("ID_DE_DEPARTMENT")
+})
+
+
+Departments
+db.Departments.insertOne({
+  codigo: "19",
+  nombre: "Cauca",
+  estado: true
+})
+
+Users
+db.Users.insertOne({
+  usuario: "admin",
+  contrasenia: "1234",
+  estado: true
+})
+
+Persons
+db.Persons.insertOne({
+  tipoDocumento: "CC",
+  documento: "11223344",
+  primerNombre: "Carlos",
+  segundoNombre: "Andrés",
+  primerApellido: "López",
+  segundoApellido: "Martínez",
+  correo: "carlos@example.com",
+  telefono: "3120000000",
+  fechaNacimiento: ISODate("1995-06-15T00:00:00Z"),
+  direccion: "Cra 5 #10-20",
+  estado: true,
+  usuarioId: ObjectId("ID_DE_USER"),
+  ciudadId: ObjectId("ID_DE_CITY")
+})
+
+

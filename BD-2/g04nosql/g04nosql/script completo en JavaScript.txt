@@ -1,0 +1,62 @@
+Cómo ejecutarlo
+Opción 1: Desde la terminal con mongosh
+Guarda el script como init_g04_collections.js.
+Abre la terminal.
+Ejecuta: mongosh < init_g04_collections.js
+
+Opción 2: Desde MongoDB Compass
+Abre g_04 en Compass.
+Ve a la pestaña Playground.
+Pega el código.
+Haz clic en Run.
+
+
+// Selecciona la base de datos
+use g_04
+
+// 1. Crear colecciones
+db.createCollection("Departments")
+db.createCollection("Cities")
+db.createCollection("Users")
+db.createCollection("Persons")
+
+// 2. Insertar documento de prueba en Departments
+const deptId = db.Departments.insertOne({
+  codigo: "19",
+  nombre: "Cauca",
+  estado: true
+}).insertedId
+
+// 3. Insertar documento de prueba en Cities
+const cityId = db.Cities.insertOne({
+  codigo: "001",
+  nombre: "Popayán",
+  estado: true,
+  departmentId: deptId
+}).insertedId
+
+// 4. Insertar documento de prueba en Users
+const userId = db.Users.insertOne({
+  usuario: "admin",
+  contrasenia: "1234",
+  estado: true
+}).insertedId
+
+// 5. Insertar documento de prueba en Persons
+db.Persons.insertOne({
+  tipoDocumento: "CC",
+  documento: "11223344",
+  primerNombre: "Carlos",
+  segundoNombre: "Andrés",
+  primerApellido: "López",
+  segundoApellido: "Martínez",
+  correo: "carlos@example.com",
+  telefono: "3120000000",
+  fechaNacimiento: ISODate("1995-06-15T00:00:00Z"),
+  direccion: "Cra 5 #10-20",
+  estado: true,
+  usuarioId: userId,
+  ciudadId: cityId
+})
+
+print("? Colecciones y datos de prueba creados con éxito en la base de datos g_04.")

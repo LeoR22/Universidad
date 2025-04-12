@@ -1,0 +1,34 @@
+package com.unab.g04nosql.Collection; // Paquete donde se encuentra esta clase
+
+import org.springframework.data.annotation.Id; // Anotación para identificar el campo _id en MongoDB
+import org.springframework.data.mongodb.core.mapping.Document; // Marca la clase como un documento Mongo
+import org.springframework.data.mongodb.core.mapping.Field; // Permite asignar nombres específicos a los campos
+
+@Document("Departments") // Este documento se guardará en la colección 'Departments'
+public class Departments {
+
+	@Id // Campo que representará el identificador único (_id)
+	private String id;
+
+	@Field("codigo") // Campo 'codigo' en el documento Mongo
+	private String codigo;
+
+	@Field("nombre") // Campo 'nombre' en el documento Mongo
+	private String nombre;
+
+	@Field("estado") // Campo 'estado' en el documento Mongo (activo/inactivo)
+	private Boolean estado;
+
+	// Getters y setters para cada campo
+	public String getId() { return id; }
+	public void setId(String id) { this.id = id; }
+
+	public String getCodigo() { return codigo; }
+	public void setCodigo(String codigo) { this.codigo = codigo; }
+
+	public String getNombre() { return nombre; }
+	public void setNombre(String nombre) { this.nombre = nombre; }
+
+	public Boolean getEstado() { return estado; }
+	public void setEstado(Boolean estado) { this.estado = estado; }
+}

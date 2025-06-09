@@ -1,0 +1,107 @@
+<svg viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg">
+  <!-- Capa de Presentación -->
+  <rect x="50" y="50" width="800" height="120" fill="#e6f3ff" stroke="#0066cc" stroke-width="2" rx="5"/>
+  <text x="450" y="75" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="#0066cc">CAPA DE PRESENTACIÓN</text>
+  
+  <!-- Firewall/Load Balancer -->
+  <rect x="80" y="90" width="120" height="60" fill="#ffcccc" stroke="#cc0000" stroke-width="1" rx="3"/>
+  <text x="140" y="115" text-anchor="middle" font-family="Arial" font-size="11" fill="#cc0000">Firewall/</text>
+  <text x="140" y="130" text-anchor="middle" font-family="Arial" font-size="11" fill="#cc0000">Load Balancer</text>
+  
+  <!-- Streamlit Frontend -->
+  <rect x="250" y="90" width="150" height="60" fill="#cce6ff" stroke="#0066cc" stroke-width="1" rx="3"/>
+  <text x="325" y="115" text-anchor="middle" font-family="Arial" font-size="12" fill="#0066cc">Streamlit</text>
+  <text x="325" y="130" text-anchor="middle" font-family="Arial" font-size="12" fill="#0066cc">Frontend</text>
+  
+  <!-- Session State -->
+  <rect x="450" y="90" width="120" height="60" fill="#cce6ff" stroke="#0066cc" stroke-width="1" rx="3"/>
+  <text x="510" y="115" text-anchor="middle" font-family="Arial" font-size="11" fill="#0066cc">Session State</text>
+  <text x="510" y="130" text-anchor="middle" font-family="Arial" font-size="11" fill="#0066cc">Management</text>
+
+  <!-- Cache Layer -->
+  <rect x="620" y="90" width="120" height="60" fill="#cce6ff" stroke="#0066cc" stroke-width="1" rx="3"/>
+  <text x="680" y="115" text-anchor="middle" font-family="Arial" font-size="11" fill="#0066cc">Cache Layer</text>
+  <text x="680" y="130" text-anchor="middle" font-family="Arial" font-size="11" fill="#0066cc">(Conexiones)</text>
+
+  <!-- Capa de Lógica de Negocio -->
+  <rect x="50" y="200" width="800" height="180" fill="#f0f8e6" stroke="#339933" stroke-width="2" rx="5"/>
+  <text x="450" y="225" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="#339933">CAPA DE LÓGICA DE NEGOCIO</text>
+  
+  <!-- Query Processor -->
+  <rect x="80" y="250" width="140" height="80" fill="#ccffcc" stroke="#339933" stroke-width="1" rx="3"/>
+  <text x="150" y="275" text-anchor="middle" font-family="Arial" font-size="11" fill="#339933">Query Processor</text>
+  <text x="150" y="290" text-anchor="middle" font-family="Arial" font-size="10" fill="#339933">- Validación NL</text>
+  <text x="150" y="305" text-anchor="middle" font-family="Arial" font-size="10" fill="#339933">- Conversión SQL</text>
+  <text x="150" y="320" text-anchor="middle" font-family="Arial" font-size="10" fill="#339933">- Sanitización</text>
+
+  <!-- LLM Service -->
+  <rect x="260" y="250" width="140" height="80" fill="#ccffcc" stroke="#339933" stroke-width="1" rx="3"/>
+  <text x="330" y="275" text-anchor="middle" font-family="Arial" font-size="11" fill="#339933">LLM Service</text>
+  <text x="330" y="290" text-anchor="middle" font-family="Arial" font-size="10" fill="#339933">- Groq API</text>
+  <text x="330" y="305" text-anchor="middle" font-family="Arial" font-size="10" fill="#339933">- Llama3-8b</text>
+  <text x="330" y="320" text-anchor="middle" font-family="Arial" font-size="10" fill="#339933">- Context Mgmt</text>
+
+  <!-- Connection Manager -->
+  <rect x="440" y="250" width="140" height="80" fill="#ccffcc" stroke="#339933" stroke-width="1" rx="3"/>
+  <text x="510" y="275" text-anchor="middle" font-family="Arial" font-size="11" fill="#339933">Connection</text>
+  <text x="510" y="290" text-anchor="middle" font-family="Arial" font-size="11" fill="#339933">Manager</text>
+  <text x="510" y="305" text-anchor="middle" font-family="Arial" font-size="10" fill="#339933">- Pool Management</text>
+  <text x="510" y="320" text-anchor="middle" font-family="Arial" font-size="10" fill="#339933">- Security</text>
+
+  <!-- Result Formatter -->
+  <rect x="620" y="250" width="140" height="80" fill="#ccffcc" stroke="#339933" stroke-width="1" rx="3"/>
+  <text x="690" y="275" text-anchor="middle" font-family="Arial" font-size="11" fill="#339933">Result</text>
+  <text x="690" y="290" text-anchor="middle" font-family="Arial" font-size="11" fill="#339933">Formatter</text>
+  <text x="690" y="305" text-anchor="middle" font-family="Arial" font-size="10" fill="#339933">- Data Transform</text>
+  <text x="690" y="320" text-anchor="middle" font-family="Arial" font-size="10" fill="#339933">- Visualization</text>
+
+  <!-- Capa de Datos -->
+  <rect x="50" y="410" width="800" height="120" fill="#fff0e6" stroke="#ff6600" stroke-width="2" rx="5"/>
+  <text x="450" y="435" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="#ff6600">CAPA DE DATOS</text>
+  
+  <!-- MySQL Database -->
+  <rect x="200" y="450" width="150" height="60" fill="#ffddcc" stroke="#ff6600" stroke-width="1" rx="3"/>
+  <text x="275" y="475" text-anchor="middle" font-family="Arial" font-size="12" fill="#ff6600">MySQL</text>
+  <text x="275" y="490" text-anchor="middle" font-family="Arial" font-size="12" fill="#ff6600">Database</text>
+
+  <!-- Schema Manager -->
+  <rect x="400" y="450" width="140" height="60" fill="#ffddcc" stroke="#ff6600" stroke-width="1" rx="3"/>
+  <text x="470" y="475" text-anchor="middle" font-family="Arial" font-size="11" fill="#ff6600">Schema</text>
+  <text x="470" y="490" text-anchor="middle" font-family="Arial" font-size="11" fill="#ff6600">Manager</text>
+
+  <!-- Capa Externa -->
+  <rect x="50" y="560" width="800" height="100" fill="#f5f5f5" stroke="#666666" stroke-width="2" rx="5"/>
+  <text x="450" y="585" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="#666666">SERVICIOS EXTERNOS</text>
+  
+  <!-- Groq API -->
+  <rect x="200" y="600" width="120" height="40" fill="#e0e0e0" stroke="#666666" stroke-width="1" rx="3"/>
+  <text x="260" y="625" text-anchor="middle" font-family="Arial" font-size="11" fill="#666666">Groq API</text>
+
+  <!-- Environment Config -->
+  <rect x="400" y="600" width="120" height="40" fill="#e0e0e0" stroke="#666666" stroke-width="1" rx="3"/>
+  <text x="460" y="625" text-anchor="middle" font-family="Arial" font-size="11" fill="#666666">Env Config</text>
+
+  <!-- Conexiones entre capas -->
+  <!-- Frontend to Business Logic -->
+  <line x1="325" y1="150" x2="330" y2="250" stroke="#666666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="510" y1="150" x2="510" y2="250" stroke="#666666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Business Logic to Data -->
+  <line x1="275" y1="330" x2="275" y2="450" stroke="#666666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="470" y1="330" x2="470" y2="450" stroke="#666666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Business Logic to External -->
+  <line x1="330" y1="330" x2="260" y2="600" stroke="#666666" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- Definir marcador de flecha -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666666"/>
+    </marker>
+  </defs>
+
+  <!-- Etiquetas de flujo -->
+  <text x="360" y="200" text-anchor="middle" font-family="Arial" font-size="10" fill="#666666" transform="rotate(-90 360 200)">HTTP/WebSocket</text>
+  <text x="300" y="390" text-anchor="middle" font-family="Arial" font-size="10" fill="#666666" transform="rotate(-90 300 390)">SQL Queries</text>
+  <text x="280" y="480" text-anchor="middle" font-family="Arial" font-size="10" fill="#666666" transform="rotate(-45 280 480)">API Calls</text>
+</svg>

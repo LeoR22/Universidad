@@ -1,0 +1,10 @@
+https://es.wikipedia.org/wiki/Profundidad_de_color
+4 colores = 2 bits
+
+72 bits ÷ 8 = 9 bytes
+
+Aquí el 8 es el factor de conversión entre bits y bytes.
+
+✅ En resumen:
+
+El número 8 viene del estándar 1 byte = 8 bits.

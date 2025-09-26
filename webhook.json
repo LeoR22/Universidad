@@ -1,0 +1,216 @@
+{
+  "name": "Agent_Text2SQL",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "prueba",
+        "responseMode": "lastNode",
+        "options": {
+          "responseContentType": "application/json"
+        }
+      },
+      "id": "adae5985-2a55-4d04-9232-f9e83c9ee938",
+      "name": "Webhook Entrada",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -16,
+        112
+      ],
+      "webhookId": "8b304629-d8ae-4934-9e66-2e0681866dd4"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"sql_query\": \"{{$json.corrected_sql}}\",\n  \"raw_response\": \"{{$json.raw_response}}\",\n  \"success\": \"{{$json.success}}\"\n}\n",
+        "options": {}
+      },
+      "id": "a8529e02-4bee-4865-831f-8fa4989af562",
+      "name": "Responder Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1888,
+        256
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Schema Linking: preparar datos\nconst inputData = $input.first().json;\nconst chatInput = inputData.chatInput || inputData.text || 'No question provided';\n\nconst schemas = {\n  \"resultados_apis.maestro_analitica_apicv10\": [\n    \"kudu_update (timestamp): fecha de inserción en Kudu. Ej: 2024-10-02 13:58:50.091\",\n    \"date_time (timestamp): fecha y hora exacta de la invocación. Ej: 2024-10-01 20:41:20\",\n    \"api_id (string): identificador único de la API. Ej: ebff43b7-f94e-4606-9b3e-0432b0eecea8\",\n    \"api_name (string): nombre de la API. Ej: accounts-reconciliation-data-query\",\n    \"api_versionn (string): versión de la API. Ej: 1.0.0\",\n    \"app_id (string): identificador único de la app. Ej: 6c75f595-e1dc-4dea-b2df-608666a80151\",\n    \"app_name (string): nombre de la app. Ej: mascaratransaccional-nu0021001\",\n    \"org_name (string): organización pública o privada. Ej: private-bancolombia\",\n    \"product_id (string): identificador del producto. Ej: f97d8087-83e1-4bc8-ad6f-58071419e825\",\n    \"product_name (string): nombre del producto. Ej: accounts-reconciliation\",\n    \"product_version (string): versión del producto. Ej: 1.0.0\",\n    \"rate_limit_count (int): solicitudes restantes antes del límite. Ej: 78\",\n    \"rate_limit_interval (int): intervalo de tiempo del rate limit. Ej: 1\",\n    \"rate_limit_limit (int): máximo de solicitudes permitidas. Ej: 80\",\n    \"rate_limit_period (int): ventana de tiempo del límite. Ej: 1\",\n    \"rate_limit_reject (string): indica si fue rechazada por rate limit. Ej: false\",\n    \"rate_limit_unit (string): unidad de tiempo (second/hour). Ej: second\",\n    \"time_to_serve_request (int): tiempo de respuesta en ms. Ej: 840\",\n    \"request_http_headers (string): headers de la solicitud. Ej: [{\\\"user-agent\\\":\\\"ReactorNetty/1.1.19\\\"}, ...]\",\n    \"request_body (string): cuerpo enviado en la solicitud. Ej: {\\\"data\\\":{\\\"customer\\\":{\\\"documentType\\\":\\\"CC\\\"}}}\",\n    \"response_http_headers (string): headers de la respuesta. Ej: [{\\\"API-Version\\\":\\\"1.0.0\\\"}, ...]\",\n    \"response_body (string): cuerpo de la respuesta. Ej: {\\\"status\\\":404,\\\"title\\\":\\\"Not Found\\\"}\",\n    \"gateway_host (string): host destino. Ej: gw-transversales-ciclocredito.apps.bancolombia.corp\",\n    \"message_id (string): identificador único del mensaje. Ej: 5c130811-13bf-4a1c-82cc-571c4ed17b61\",\n    \"resource_id (string): identificador de la operación. Ej: default-plan:1.0.0:POST:/v1/...\",\n    \"uri_path (string): ruta solicitada. Ej: v1/operations/cross-product/account-management/reconciliation\",\n    \"space_id (string): id del espacio. Ej: 6c29745b-7953-4ca6-a5b6-639a4ac353e9\",\n    \"space_name (string): nombre del espacio. Ej: transversales-ciclocredito\",\n    \"status_code (string): código HTTP devuelto. Ej: 404 Not Found\",\n    \"transaction_id (string): id de la transacción. Ej: 17357377\",\n    \"uuid (string): identificador único del registro. Ej: 0461c612-d3c5-4f4f-95c0-f36ab6ffdd25\",\n    \"ingestion_year (int): año de la invocación. Ej: 2024\",\n    \"ingestion_month (int): mes de la invocación. Ej: 10\",\n    \"ingestion_day (int): día de la invocación. Ej: 1\"\n  ]\n};\n\nconst table = \"maestro_analitica_apicv10\";\nconst database = \"resultados_apis\";\nconst fullTable = `${database}.${table}`;\nconst columnsList = schemas[fullTable];\nconst columns = columnsList ? columnsList.join(\"\\n- \") : null;\n\nlet systemPrompt;\nif (columns) {\n  systemPrompt = `Eres un experto en generar consultas SQL en el dialecto de Impala.utilizando siempre las mejores prácticas y un enfoque metodológico para garantizar consultas precisas y eficientes.\nTen en cuenta los siguientes parametros y reglas\nDatabase: ${database}\nTable: ${table}\nFull reference: ${fullTable}\nColumns available (with descriptions and examples):\n- ${columns}\n\nRULES:\n- ONLY output valid SQL queries for Impala dialect.\n- ALWAYS use table '${fullTable}' in FROM.\n- Do NOT explain, apologize, or reference lack of real-time access.\n- NEVER invent or substitute table names.\n- NEVER output placeholders like 'nombre_de_la_tabla'.\n- Use WITH clauses, JOINs, subqueries or aggregations when needed.\n- Differentiate between counts (absolute values) and rates/percentages (relative values).\n- ALWAYS generate the SQL, even if the question refers to future or hypothetical dates.\n- STRICT FORMAT: Always respond with\n\nSQL: [\n<query>\n]\n\n- Do NOT explain anything outside the SQL.\nIf the question truly cannot be mapped, respond EXACTLY:\nSQL: [SELECT NULL;]`;\n} else {\n  systemPrompt = `Table '${fullTable}' not supported by schema.\\nRespond exactly: SQL: [SELECT NULL;]`;\n}\n\nreturn [{\n  json: {\n    ...inputData,\n    database,\n    table,\n    fullTable,\n    schema: columns,\n    pregunta: chatInput,\n    systemPrompt,\n    fullPrompt: `${systemPrompt}\\n\\nQuestion: ${chatInput}`\n  }\n}];\n"
+      },
+      "id": "380f4bd0-3261-42d6-ad6b-880db05e667f",
+      "name": "Schema Linking",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        496,
+        32
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Few-Shots mejorados con WITH, JOIN y subqueries (consistentes)\nconst base = $input.first().json;\n\nconst fewShots = `\nQ: ¿Cuántos registros existen en la base de datos?\nSQL: [\nSELECT COUNT(*) AS total_registros\nFROM ${base.fullTable};\n]\n\nQ: ¿Cuántos registros se generaron el 15 de septiembre de 2024?\nSQL: [\nSELECT COUNT(*) AS total_registros\nFROM ${base.fullTable}\nWHERE ingestion_year = 2024\n  AND ingestion_month = 9\n  AND ingestion_day = 15;\n]\n\nQ: ¿Cuáles fueron los consumidores (app_name) que más llamados tuvieron el día 3 de enero del año 2025?\nSQL: [\nSELECT app_name, COUNT(*) AS total_llamadas\nFROM ${base.fullTable}\nWHERE ingestion_year = 2025\n  AND ingestion_month = 1\n  AND ingestion_day = 3\nGROUP BY app_name\nORDER BY total_llamadas DESC;\n]\n\nQ: ¿Cuáles son las 10 APIs con más registros donde rate_limit_count = 0?\nSQL: [\nSELECT api_name, COUNT(*) AS total_registros\nFROM ${base.fullTable}\nWHERE rate_limit_count = 0\nGROUP BY api_name\nORDER BY total_registros DESC\nLIMIT 10;\n]\n\nQ: ¿Cuál es el API y tiempo de respuesta promedio para cada una, ordenado de mayor a menor?\nSQL: [\nSELECT api_name,\n       AVG(CAST(time_to_serve_request AS INT)) AS tiempo_promedio_respuesta\nFROM ${base.fullTable}\nGROUP BY api_name\nORDER BY tiempo_promedio_respuesta DESC;\n]\n\nQ: ¿Cuál es el porcentaje de errores 5XX y 4XX en las respuestas de las APIs para el año 2024?\nSQL: [\nSELECT\n  (COUNT(CASE WHEN status_code LIKE '5%' THEN 1 END) * 100.0 / COUNT(*)) AS tasa_5XX,\n  (COUNT(CASE WHEN status_code LIKE '4%' THEN 1 END) * 100.0 / COUNT(*)) AS tasa_4XX\nFROM ${base.fullTable}\nWHERE ingestion_year = 2024;\n]\n\nQ: ¿Cuál es la hora con más registros de tiempos de respuesta altos el 31 de diciembre de 2024?\nSQL: [\nSELECT EXTRACT(HOUR FROM date_time) AS hora,\n       MAX(CAST(time_to_serve_request AS FLOAT)) AS tiempo_maximo_respuesta\nFROM ${base.fullTable}\nWHERE ingestion_year = 2024\n  AND ingestion_month = 12\n  AND ingestion_day = 31\nGROUP BY EXTRACT(HOUR FROM date_time)\nORDER BY tiempo_maximo_respuesta DESC\nLIMIT 1;\n]\n\nQ: ¿Cuáles son los días con mayor actividad de registros?\nSQL: [\nSELECT \n  CAST(CONCAT(CAST(ingestion_year AS STRING), '-', \n              LPAD(CAST(ingestion_month AS STRING), 2, '0'), '-', \n              LPAD(CAST(ingestion_day AS STRING), 2, '0')) AS DATE) AS fecha,\n  COUNT(*) AS total_llamadas\nFROM ${base.fullTable}\nGROUP BY fecha\nORDER BY total_llamadas DESC;\n]\n\nQ: ¿Cuál fue el endpoint (uri_path) con más llamadas entre el 10 y 20 de octubre de 2024?\nSQL: [\nSELECT uri_path, COUNT(*) AS total_llamadas\nFROM ${base.fullTable}\nWHERE ingestion_year = 2024\n  AND ingestion_month = 10\n  AND ingestion_day BETWEEN 10 AND 20\nGROUP BY uri_path\nORDER BY total_llamadas DESC\nLIMIT 1;\n]\n\nQ: ¿Cuáles son las APIs y productos donde se excedió el 80% del rate_limit el 5 de septiembre de 2024?\nSQL: [\nSELECT product_name, api_name\nFROM ${base.fullTable}\nWHERE ingestion_year = 2024\n  AND ingestion_month = 9\n  AND ingestion_day = 5\n  AND rate_limit_limit > 0\nGROUP BY product_name, api_name, rate_limit_limit\nHAVING COUNT(*) >= rate_limit_limit * 0.8\nORDER BY product_name, api_name;\n]\n\nQ: ¿Cuál es el API y su respectivo status_code de la última petición realizada?\nSQL: [\nSELECT api_name, status_code\nFROM ${base.fullTable}\nORDER BY date_time DESC\nLIMIT 1;\n]\n\n\nQ: ¿Cuántos registros se han generado por cada status_code entre el 15 y el 22 de agosto de 2024?\nSQL: [\nSELECT status_code, COUNT(*) AS total_registros\nFROM ${base.fullTable}\nWHERE ingestion_year = 2024\n  AND ingestion_month = 8\n  AND ingestion_day BETWEEN 15 AND 22\nGROUP BY status_code\nORDER BY total_registros DESC;\n]\n\nQ: ¿Cuáles fueron los consumidores (app_name) que más llamados tuvieron el día 3 de enero del año 2025?\nSQL: [\nSELECT app_name, COUNT(*) AS total_llamadas\nFROM ${base.fullTable}\nWHERE ingestion_year = 2025\n  AND ingestion_month = 1\n  AND ingestion_day = 3\nGROUP BY app_name\nORDER BY total_llamadas DESC;\n]\n\nQ: Comparación de llamados acumulados hasta diciembre de 2024 vs 2025\nSQL: [\nSELECT ingestion_year, COUNT(*) AS total_calls\nFROM ${base.fullTable}\nWHERE (ingestion_year = 2024 AND ingestion_month <= 12)\n   OR (ingestion_year = 2025 AND ingestion_month <= 12)\nGROUP BY ingestion_year\nORDER BY ingestion_year;\n]\n\nQ: ¿Cuál es el API con mayor tiempo de respuesta promedio?\nSQL: [\nWITH TiempoPromedio AS (\n  SELECT api_name,\n         AVG(CAST(time_to_serve_request AS FLOAT)) AS tiempo_promedio\n  FROM ${base.fullTable}\n  GROUP BY api_name\n)\nSELECT api_name, tiempo_promedio\nFROM TiempoPromedio\nORDER BY tiempo_promedio DESC\nLIMIT 1;\n]\n\nQ: ¿Cuántas solicitudes se hicieron por hora del día?\nSQL: [\nSELECT EXTRACT(HOUR FROM date_time) AS hora,\n       COUNT(*) AS total_solicitudes\nFROM ${base.fullTable}\nGROUP BY hora\nORDER BY hora;\n]\n\nQ: ¿Cuál es el porcentaje de solicitudes por hora del día?\nSQL: [\nWITH Totales AS (\n  SELECT COUNT(*) AS total_global\n  FROM ${base.fullTable}\n),\nSolicitudesPorHora AS (\n  SELECT EXTRACT(HOUR FROM date_time) AS hora,\n         COUNT(*) AS total_solicitudes\n  FROM ${base.fullTable}\n  GROUP BY hora\n)\nSELECT s.hora,\n       (s.total_solicitudes * 100.0 / t.total_global) AS tasa_porcentual\nFROM SolicitudesPorHora s, Totales t\nORDER BY s.hora;\n]\n\nQ: ¿Cuál es el porcentaje de solicitudes fallidas por espacio?\nSQL: [\nWITH TotalSolicitudes AS (\n    SELECT ingestion_year, ingestion_month, ingestion_day, space_name, COUNT(*) AS total_solicitudes\n    FROM ${base.fullTable}\n    GROUP BY ingestion_year, ingestion_month, ingestion_day, space_name\n),\nFallos AS (\n    SELECT ingestion_year, ingestion_month, ingestion_day, space_name, COUNT(*) AS fallos\n    FROM ${base.fullTable}\n    WHERE CAST(SUBSTRING(status_code, 1, 3) AS INT) >= 400\n    GROUP BY ingestion_year, ingestion_month, ingestion_day, space_name\n)\nSELECT t.ingestion_year AS Año,\n       t.ingestion_month AS Mes,\n       t.ingestion_day AS Dia,\n       t.space_name,\n       t.total_solicitudes,\n       f.fallos,\n       (CAST(f.fallos AS DECIMAL(10,2)) / CAST(t.total_solicitudes AS DECIMAL(10,2))) * 100 AS porcentaje_fallos\nFROM TotalSolicitudes t\nJOIN Fallos f ON t.ingestion_year = f.ingestion_year\n             AND t.ingestion_month = f.ingestion_month\n             AND t.ingestion_day = f.ingestion_day\n             AND t.space_name = f.space_name\nORDER BY porcentaje_fallos DESC;\n]\n\nQ: ¿Cuál es el porcentaje de errores 500 por API en octubre de 2024 donde el space_name es 'depositos'?\nSQL: [\nWITH Errores AS (\n  SELECT api_name,\n         COUNT(*) AS total,\n         COUNT(CASE WHEN status_code LIKE '500%' THEN 1 END) AS errores_500\n  FROM ${base.fullTable}\n  WHERE ingestion_year = 2024\n    AND ingestion_month = 10\n    AND space_name = 'depositos'\n  GROUP BY api_name\n)\nSELECT api_name,\n       (errores_500 * 100.0 / total) AS error_500_percentage\nFROM Errores\nORDER BY error_500_percentage DESC;\n]\n\nQ: ¿Qué APIs tienen más de 1000 registros y tiempo de respuesta promedio mayor a 500ms?\nSQL: [\nWITH Resumen AS (\n  SELECT api_name, COUNT(*) AS total, AVG(time_to_serve_request) AS avg_time\n  FROM ${base.fullTable}\n  GROUP BY api_name\n)\nSELECT api_name, total, avg_time\nFROM Resumen\nWHERE total > 1000 AND avg_time > 500\nORDER BY avg_time DESC;\n]\n\nQ: ¿Cuál es la app con más llamadas y el API más usado por esa app?\nSQL: [\nSELECT a.app_name, a.total_llamadas, b.api_name, b.api_count\nFROM (\n  SELECT app_name, COUNT(*) AS total_llamadas\n  FROM ${base.fullTable}\n  GROUP BY app_name\n  ORDER BY total_llamadas DESC\n  LIMIT 1\n) a\nJOIN (\n  SELECT app_name, api_name, COUNT(*) AS api_count\n  FROM ${base.fullTable}\n  GROUP BY app_name, api_name\n) b\nON a.app_name = b.app_name\nORDER BY b.api_count DESC\nLIMIT 1;\n]\n\nQ: ¿Cuál fue el endpoint (uri_path) más usado en 2024 pero no en 2025?\nSQL: [\nSELECT uri_path\nFROM ${base.fullTable}\nWHERE ingestion_year = 2024\nGROUP BY uri_path\nHAVING COUNT(*) > 0\n   AND uri_path NOT IN (\n     SELECT uri_path\n     FROM ${base.fullTable}\n     WHERE ingestion_year = 2025\n   );\n]\n`;\n\nreturn [{\n  json: {\n    ...base,\n    fewShots,\n    fullPrompt: base.systemPrompt + '\\n\\nEjemplos:\\n' + fewShots + '\\n\\nSTRICT FORMAT: Always respond with SQL only.\\n\\nQuestion: ' + base.pregunta,\n    task: base.systemPrompt + '\\n\\nEjemplos:\\n' + fewShots + '\\n\\nSTRICT FORMAT: Always respond with SQL only.\\n\\nQuestion: ' + base.pregunta\n  }\n}];\n"
+      },
+      "id": "5e3cdbfe-f7d0-46c6-bafb-71c3af145532",
+      "name": "Few Shots",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        832,
+        64
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "const response = $input.first().json;\nlet content = response.text || response.output || response.content || '';\n\nconst sqlMatch = content.match(/SQL:\\s*\\[([\\s\\S]*?)\\]/i);\nconst sqlQuery = sqlMatch ? sqlMatch[1].trim() : content.trim();\n\nconst sqlCodeMatch = content.match(/```sql\\n([\\s\\S]*?)\\n```/i);\nconst sqlFromCode = sqlCodeMatch ? sqlCodeMatch[1].trim() : null;\n\nlet cleanSql = sqlFromCode || sqlQuery;\n\ncleanSql = cleanSql\n  .replace(/^\\[|\\]$/g, '')\n  .replace(/^['\"]|['\"]$/g, '')\n  .trim();\n\nconst expectedTable = response.fullTable || \"resultados_apis.maestro_analitica_apicv10\";\ncleanSql = cleanSql.replace(/FROM\\s+[\\w.]+(\\s+\\w+)?/i, `FROM ${expectedTable}`);\n\nif (!/^select/i.test(cleanSql)) {\n  cleanSql = \"SELECT NULL;\";\n}\n\nreturn [{\n  json: {\n    ...response,\n    sql_query: cleanSql,\n    raw_response: content,\n    success: cleanSql.toLowerCase().includes(\"select\")\n  }\n}];"
+      },
+      "id": "24380ac8-74a6-4cfd-a823-bc8ab1f57f20",
+      "name": "Extract SQL",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        1392,
+        -96
+      ]
+    },
+    {
+      "parameters": {
+        "functionCode": "// Self-Correction: valida columnas y corrige si hay inventadas\nconst input = $input.first().json;\n\nconst validColumns = input.schema\n  ? input.schema.split(\"\\n- \").map(c => c.split(\" \")[0].trim())\n  : [];\n\nlet sql = input.sql_query || \"\";\n\n// 1. Si no hay SQL, fallback\nif (!sql) {\n  sql = \"SELECT NULL;\";\n}\n\n// 2. Validar columnas contra esquema\nconst usedCols = [...sql.matchAll(/\\b[a-zA-Z0-9_]+\\b/g)].map(m => m[0]);\n\nconst reserved = new Set([\n  \"SELECT\",\"FROM\",\"WHERE\",\"GROUP\",\"BY\",\"ORDER\",\"LIMIT\",\n  \"WITH\",\"AS\",\"JOIN\",\"ON\",\"AND\",\"OR\",\"NOT\",\"IN\",\"IS\",\n  \"NULL\",\"COUNT\",\"SUM\",\"AVG\",\"MAX\",\"MIN\",\"DISTINCT\",\n  \"CAST\",\"EXTRACT\",\"CASE\",\"WHEN\",\"THEN\",\"ELSE\",\"END\",\n  \"DATE_SUB\",\"NOW\",\"LPAD\",\"CONCAT\",\"YEAR\",\"MONTH\",\"DAY\"\n]);\n\nconst invalidCols = usedCols.filter(c =>\n  !reserved.has(c.toUpperCase()) &&\n  !validColumns.includes(c)\n);\n\nif (invalidCols.length > 0) {\n  sql = \"SELECT NULL;\";\n}\n\nreturn [{\n  json: {\n    ...input,\n    corrected_sql: sql\n  }\n}];\n"
+      },
+      "id": "04df0469-6634-41c1-94c8-d8937fa685be",
+      "name": "Self-Correction",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        1536,
+        160
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "8ae06628-d954-4499-a96f-9e54fbc96786",
+      "name": "AI Agent1",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1056,
+        176
+      ]
+    },
+    {
+      "parameters": {
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatCohere",
+      "typeVersion": 1,
+      "position": [
+        992,
+        384
+      ],
+      "id": "e374be0f-cc84-41cc-8488-361832176a10",
+      "name": "Cohere Chat Model1",
+      "credentials": {
+        "cohereApi": {
+          "id": "7hBAD7LzZI1CUGPX",
+          "name": "CohereApi account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook Entrada": {
+      "main": [
+        [
+          {
+            "node": "Schema Linking",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schema Linking": {
+      "main": [
+        [
+          {
+            "node": "Few Shots",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Few Shots": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract SQL": {
+      "main": [
+        [
+          {
+            "node": "Self-Correction",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Self-Correction": {
+      "main": [
+        [
+          {
+            "node": "Responder Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Extract SQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cohere Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2bc93fed-3b3b-4264-8992-17d7d1c5a541",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0c6d4fd95253a46ab2b3df4f50ca84205a50c9ffaa71f0a4c748d5f5b364467a"
+  },
+  "id": "RyT9s4oW2IqmlMnn",
+  "tags": []
+}
